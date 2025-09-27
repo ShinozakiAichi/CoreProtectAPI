@@ -351,12 +351,15 @@ internal sealed class JavaSerializationParser
         switch (elementType)
         {
             case 'B':
+            {
                 var handleIndex = RegisterPlaceholder();
                 var bytes = _data.Span.Slice(_position, length).ToArray();
                 _position += length;
                 SetHandle(handleIndex, bytes);
                 return bytes;
+            }
             case 'I':
+            {
                 var handleIndex = RegisterPlaceholder();
                 var ints = new int[length];
                 SetHandle(handleIndex, ints);
@@ -366,6 +369,7 @@ internal sealed class JavaSerializationParser
                 }
 
                 return ints;
+            }
             case 'L':
             case '[':
                 var list = new List<object?>(length);
@@ -418,6 +422,8 @@ internal sealed class JavaSerializationParser
     {
         _handles.Add(value);
     }
+
+    private void RegisterHandle(object? value) => RegisterValue(value);
 
     private byte ReadByte()
     {

@@ -6,7 +6,7 @@ namespace CoreProtect.Api.Models;
 
 public sealed class SignQueryRequest : LogQueryRequest
 {
-    public SignQueryParameters Build(ApiSettings settings)
+    public new SignQueryParameters Build(ApiSettings settings)
     {
         var baseParams = base.Build(settings);
         return new SignQueryParameters(baseParams);

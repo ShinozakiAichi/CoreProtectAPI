@@ -6,7 +6,7 @@ namespace CoreProtect.Api.Models;
 
 public sealed class ContainerQueryRequest : LogQueryRequest
 {
-    public ContainerQueryParameters Build(ApiSettings settings)
+    public new ContainerQueryParameters Build(ApiSettings settings)
     {
         var baseParams = base.Build(settings);
         return new ContainerQueryParameters(baseParams);

@@ -8,7 +8,7 @@ public sealed class ChatQueryRequest : LogQueryRequest
 {
     public string? Message { get; init; }
 
-    public ChatQueryParameters Build(ApiSettings settings)
+    public new ChatQueryParameters Build(ApiSettings settings)
     {
         var baseParams = base.Build(settings);
         var messageLike = string.IsNullOrWhiteSpace(Message) ? null : $"%{Message.Trim()}%";

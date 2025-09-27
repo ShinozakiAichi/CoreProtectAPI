@@ -6,7 +6,7 @@ namespace CoreProtect.Api.Models;
 
 public sealed class SessionQueryRequest : LogQueryRequest
 {
-    public SessionQueryParameters Build(ApiSettings settings)
+    public new SessionQueryParameters Build(ApiSettings settings)
     {
         var baseParams = base.Build(settings);
         return new SessionQueryParameters(baseParams);

@@ -8,7 +8,7 @@ public sealed class CommandQueryRequest : LogQueryRequest
 {
     public string? Command { get; init; }
 
-    public CommandQueryParameters Build(ApiSettings settings)
+    public new CommandQueryParameters Build(ApiSettings settings)
     {
         var baseParams = base.Build(settings);
         var commandLike = string.IsNullOrWhiteSpace(Command) ? null : $"%{Command.Trim()}%";

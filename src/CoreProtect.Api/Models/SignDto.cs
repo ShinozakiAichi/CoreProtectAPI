@@ -23,8 +23,15 @@ public sealed record SignDto(
         entry.Coordinates.X,
         entry.Coordinates.Y,
         entry.Coordinates.Z,
-        entry.Action,
+        ConvertAction(entry.Action),
         entry.Color,
         entry.GlowingText,
         entry.Lines);
+
+    private static string ConvertAction(SignAction action) => action switch
+    {
+        SignAction.Create => "create",
+        SignAction.Remove => "remove",
+        _ => "unknown"
+    };
 }

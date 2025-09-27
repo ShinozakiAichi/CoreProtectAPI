@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "dgSpecHash": "zDbkO3ZpxZk=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\allen\\source\\repos\\ShinozakiAichi\\CoreProtectAPI\\src\\CoreProtect.Api\\CoreProtect.Api.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\allen\\.nuget\\packages\\dapper\\2.1.35\\dapper.2.1.35.nupkg.sha512",
+    "C:\\Users\\allen\\.nuget\\packages\\microsoft.aspnetcore.openapi\\8.0.6\\microsoft.aspnetcore.openapi.8.0.6.nupkg.sha512",
+    "C:\\Users\\allen\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\9.0.9\\microsoft.extensions.configuration.abstractions.9.0.9.nupkg.sha512",
+    "C:\\Users\\allen\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.0\\microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512",
+    "C:\\Users\\allen\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\7.0.1\\microsoft.extensions.logging.abstractions.7.0.1.nupkg.sha512",
+    "C:\\Users\\allen\\.nuget\\packages\\microsoft.extensions.primitives\\9.0.9\\microsoft.extensions.primitives.9.0.9.nupkg.sha512",
+    "C:\\Users\\allen\\.nuget\\packages\\microsoft.openapi\\1.4.3\\microsoft.openapi.1.4.3.nupkg.sha512",
+    "C:\\Users\\allen\\.nuget\\packages\\mysqlconnector\\2.3.7\\mysqlconnector.2.3.7.nupkg.sha512",
+    "C:\\Users\\allen\\.nuget\\packages\\sharpnbt\\1.3.1\\sharpnbt.1.3.1.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -1,0 +1,16 @@
+C:\Users\allen\source\repos\ShinozakiAichi\CoreProtectAPI\src\CoreProtect.Application\bin\Debug\net8.0\CoreProtect.Application.deps.json
+C:\Users\allen\source\repos\ShinozakiAichi\CoreProtectAPI\src\CoreProtect.Application\bin\Debug\net8.0\CoreProtect.Application.dll
+C:\Users\allen\source\repos\ShinozakiAichi\CoreProtectAPI\src\CoreProtect.Application\bin\Debug\net8.0\CoreProtect.Application.pdb
+C:\Users\allen\source\repos\ShinozakiAichi\CoreProtectAPI\src\CoreProtect.Application\bin\Debug\net8.0\CoreProtect.Domain.dll
+C:\Users\allen\source\repos\ShinozakiAichi\CoreProtectAPI\src\CoreProtect.Application\bin\Debug\net8.0\CoreProtect.Domain.pdb
+C:\Users\allen\source\repos\ShinozakiAichi\CoreProtectAPI\src\CoreProtect.Application\obj\Debug\net8.0\CoreProtect.Application.csproj.AssemblyReference.cache
+C:\Users\allen\source\repos\ShinozakiAichi\CoreProtectAPI\src\CoreProtect.Application\obj\Debug\net8.0\CoreProtect.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\allen\source\repos\ShinozakiAichi\CoreProtectAPI\src\CoreProtect.Application\obj\Debug\net8.0\CoreProtect.Application.AssemblyInfoInputs.cache
+C:\Users\allen\source\repos\ShinozakiAichi\CoreProtectAPI\src\CoreProtect.Application\obj\Debug\net8.0\CoreProtect.Application.AssemblyInfo.cs
+C:\Users\allen\source\repos\ShinozakiAichi\CoreProtectAPI\src\CoreProtect.Application\obj\Debug\net8.0\CoreProtect.Application.csproj.CoreCompileInputs.cache
+C:\Users\allen\source\repos\ShinozakiAichi\CoreProtectAPI\src\CoreProtect.Application\obj\Debug\net8.0\CoreProtect.Application.sourcelink.json
+C:\Users\allen\source\repos\ShinozakiAichi\CoreProtectAPI\src\CoreProtect.Application\obj\Debug\net8.0\CoreProt.E44F92ED.Up2Date
+C:\Users\allen\source\repos\ShinozakiAichi\CoreProtectAPI\src\CoreProtect.Application\obj\Debug\net8.0\CoreProtect.Application.dll
+C:\Users\allen\source\repos\ShinozakiAichi\CoreProtectAPI\src\CoreProtect.Application\obj\Debug\net8.0\refint\CoreProtect.Application.dll
+C:\Users\allen\source\repos\ShinozakiAichi\CoreProtectAPI\src\CoreProtect.Application\obj\Debug\net8.0\CoreProtect.Application.pdb
+C:\Users\allen\source\repos\ShinozakiAichi\CoreProtectAPI\src\CoreProtect.Application\obj\Debug\net8.0\ref\CoreProtect.Application.dll

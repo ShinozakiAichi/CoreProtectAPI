@@ -1,0 +1,12 @@
+C:\Users\allen\source\repos\ShinozakiAichi\CoreProtectAPI\src\CoreProtect.Domain\bin\Debug\net8.0\CoreProtect.Domain.deps.json
+C:\Users\allen\source\repos\ShinozakiAichi\CoreProtectAPI\src\CoreProtect.Domain\bin\Debug\net8.0\CoreProtect.Domain.dll
+C:\Users\allen\source\repos\ShinozakiAichi\CoreProtectAPI\src\CoreProtect.Domain\bin\Debug\net8.0\CoreProtect.Domain.pdb
+C:\Users\allen\source\repos\ShinozakiAichi\CoreProtectAPI\src\CoreProtect.Domain\obj\Debug\net8.0\CoreProtect.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\allen\source\repos\ShinozakiAichi\CoreProtectAPI\src\CoreProtect.Domain\obj\Debug\net8.0\CoreProtect.Domain.AssemblyInfoInputs.cache
+C:\Users\allen\source\repos\ShinozakiAichi\CoreProtectAPI\src\CoreProtect.Domain\obj\Debug\net8.0\CoreProtect.Domain.AssemblyInfo.cs
+C:\Users\allen\source\repos\ShinozakiAichi\CoreProtectAPI\src\CoreProtect.Domain\obj\Debug\net8.0\CoreProtect.Domain.csproj.CoreCompileInputs.cache
+C:\Users\allen\source\repos\ShinozakiAichi\CoreProtectAPI\src\CoreProtect.Domain\obj\Debug\net8.0\CoreProtect.Domain.sourcelink.json
+C:\Users\allen\source\repos\ShinozakiAichi\CoreProtectAPI\src\CoreProtect.Domain\obj\Debug\net8.0\CoreProtect.Domain.dll
+C:\Users\allen\source\repos\ShinozakiAichi\CoreProtectAPI\src\CoreProtect.Domain\obj\Debug\net8.0\refint\CoreProtect.Domain.dll
+C:\Users\allen\source\repos\ShinozakiAichi\CoreProtectAPI\src\CoreProtect.Domain\obj\Debug\net8.0\CoreProtect.Domain.pdb
+C:\Users\allen\source\repos\ShinozakiAichi\CoreProtectAPI\src\CoreProtect.Domain\obj\Debug\net8.0\ref\CoreProtect.Domain.dll

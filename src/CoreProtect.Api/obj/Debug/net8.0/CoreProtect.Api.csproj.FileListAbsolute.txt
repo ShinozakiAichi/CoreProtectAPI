@@ -1,0 +1,7 @@
+C:\Users\allen\source\repos\ShinozakiAichi\CoreProtectAPI\src\CoreProtect.Api\obj\Debug\net8.0\CoreProtect.Api.csproj.AssemblyReference.cache
+C:\Users\allen\source\repos\ShinozakiAichi\CoreProtectAPI\src\CoreProtect.Api\obj\Debug\net8.0\CoreProtect.Api.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\allen\source\repos\ShinozakiAichi\CoreProtectAPI\src\CoreProtect.Api\obj\Debug\net8.0\CoreProtect.Api.AssemblyInfoInputs.cache
+C:\Users\allen\source\repos\ShinozakiAichi\CoreProtectAPI\src\CoreProtect.Api\obj\Debug\net8.0\CoreProtect.Api.AssemblyInfo.cs
+C:\Users\allen\source\repos\ShinozakiAichi\CoreProtectAPI\src\CoreProtect.Api\obj\Debug\net8.0\CoreProtect.Api.csproj.CoreCompileInputs.cache
+C:\Users\allen\source\repos\ShinozakiAichi\CoreProtectAPI\src\CoreProtect.Api\obj\Debug\net8.0\CoreProtect.Api.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\allen\source\repos\ShinozakiAichi\CoreProtectAPI\src\CoreProtect.Api\obj\Debug\net8.0\CoreProtect.Api.sourcelink.json

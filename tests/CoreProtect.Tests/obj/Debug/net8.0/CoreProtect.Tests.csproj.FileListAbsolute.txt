@@ -1,0 +1,8 @@
+C:\Users\allen\source\repos\ShinozakiAichi\CoreProtectAPI\tests\CoreProtect.Tests\bin\Debug\net8.0\.msCoverageSourceRootsMapping_CoreProtect.Tests
+C:\Users\allen\source\repos\ShinozakiAichi\CoreProtectAPI\tests\CoreProtect.Tests\bin\Debug\net8.0\CoverletSourceRootsMapping_CoreProtect.Tests
+C:\Users\allen\source\repos\ShinozakiAichi\CoreProtectAPI\tests\CoreProtect.Tests\obj\Debug\net8.0\CoreProtect.Tests.csproj.AssemblyReference.cache
+C:\Users\allen\source\repos\ShinozakiAichi\CoreProtectAPI\tests\CoreProtect.Tests\obj\Debug\net8.0\CoreProtect.Tests.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\allen\source\repos\ShinozakiAichi\CoreProtectAPI\tests\CoreProtect.Tests\obj\Debug\net8.0\CoreProtect.Tests.AssemblyInfoInputs.cache
+C:\Users\allen\source\repos\ShinozakiAichi\CoreProtectAPI\tests\CoreProtect.Tests\obj\Debug\net8.0\CoreProtect.Tests.AssemblyInfo.cs
+C:\Users\allen\source\repos\ShinozakiAichi\CoreProtectAPI\tests\CoreProtect.Tests\obj\Debug\net8.0\CoreProtect.Tests.csproj.CoreCompileInputs.cache
+C:\Users\allen\source\repos\ShinozakiAichi\CoreProtectAPI\tests\CoreProtect.Tests\obj\Debug\net8.0\CoreProtect.Tests.sourcelink.json

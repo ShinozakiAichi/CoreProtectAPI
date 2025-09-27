@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>preview</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../CoreProtect.Application/CoreProtect.Application.csproj" />
+    <ProjectReference Include="../CoreProtect.Infrastructure/CoreProtect.Infrastructure.csproj" />
+    <ProjectReference Include="../CoreProtect.Domain/CoreProtect.Domain.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.6" />
+  </ItemGroup>
+</Project>

@@ -11,7 +11,7 @@ public sealed class BlockQueryRequest : LogQueryRequest
     public int? BlockTypeId { get; init; }
     public string? Action { get; init; }
 
-    public BlockQueryParameters Build(ApiSettings settings)
+    public new BlockQueryParameters Build(ApiSettings settings)
     {
         var baseParams = base.Build(settings);
         BlockAction? action = null;

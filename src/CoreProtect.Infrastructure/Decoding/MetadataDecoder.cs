@@ -73,6 +73,7 @@ public sealed class MetadataDecoder : IMetadataDecoder
         {
             CompoundTag compound => ConvertCompound(compound),
             ListTag list => list.Select(ConvertTag).ToList(),
+            ByteTag byteTag when byteTag.IsBool => byteTag.Bool,
             ByteTag byteTag => byteTag.Value,
             ShortTag shortTag => shortTag.Value,
             IntTag intTag => intTag.Value,
@@ -80,7 +81,6 @@ public sealed class MetadataDecoder : IMetadataDecoder
             FloatTag floatTag => floatTag.Value,
             DoubleTag doubleTag => doubleTag.Value,
             StringTag stringTag => stringTag.Value,
-            BoolTag boolTag => boolTag.Value,
             ByteArrayTag byteArray => byteArray.Memory.ToArray(),
             IntArrayTag intArray => intArray.Memory.ToArray(),
             LongArrayTag longArray => longArray.Memory.ToArray(),

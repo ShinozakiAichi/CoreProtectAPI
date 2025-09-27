@@ -1,6 +1,8 @@
+using System;
 using System.Data;
 using System.Data.Common;
 using System.Diagnostics;
+using System.Globalization;
 using CoreProtect.Application.Abstractions;
 using CoreProtect.Application.Common;
 using CoreProtect.Domain.Entities;
@@ -184,7 +186,7 @@ SELECT DISTINCT id, current_user, uuid FROM name_history ORDER BY time DESC";
             action,
             record.GetInt32(7),
             record.IsDBNull(8) ? null : record.GetString(8),
-            record.GetBoolean(9));
+            ReadBooleanFromTinyInt(record, 9));
     }
 
     private ContainerLogEntry MapContainer(IDataRecord record)
@@ -209,7 +211,7 @@ SELECT DISTINCT id, current_user, uuid FROM name_history ORDER BY time DESC";
             record.GetInt32(8),
             record.GetInt32(9),
             metadata,
-            record.GetBoolean(11));
+            ReadBooleanFromTinyInt(record, 11));
     }
 
     private ItemLogEntry MapItem(IDataRecord record)
@@ -233,7 +235,7 @@ SELECT DISTINCT id, current_user, uuid FROM name_history ORDER BY time DESC";
             record.GetInt32(7),
             record.GetInt32(8),
             record.GetInt32(9),
-            record.GetBoolean(10));
+            ReadBooleanFromTinyInt(record, 10));
     }
 
     private CommandLogEntry MapCommand(IDataRecord record)
@@ -396,4 +398,27 @@ SELECT DISTINCT id, current_user, uuid FROM name_history ORDER BY time DESC";
     }
 
     private static string ToSqlOrder(SortDirection direction) => direction == SortDirection.Ascending ? "ASC" : "DESC";
+
+    private static bool ReadBooleanFromTinyInt(IDataRecord record, int ordinal)
+    {
+        if (record.IsDBNull(ordinal))
+        {
+            return false;
+        }
+
+        var value = record.GetValue(ordinal);
+        return value switch
+        {
+            bool boolean => boolean,
+            byte @byte => @byte != 0,
+            sbyte signedByte => signedByte != 0,
+            short shortValue => shortValue != 0,
+            ushort ushortValue => ushortValue != 0,
+            int intValue => intValue != 0,
+            uint uintValue => uintValue != 0,
+            long longValue => longValue != 0,
+            ulong ulongValue => ulongValue != 0,
+            _ => Convert.ToInt32(value, CultureInfo.InvariantCulture) != 0
+        };
+    }
 }

@@ -71,21 +71,33 @@ public sealed class MetadataDecoder : IMetadataDecoder
     {
         return tag switch
         {
-            TagCompound compound => compound.ToDictionary(kvp => kvp.Key, kvp => ConvertTag(kvp.Value), StringComparer.Ordinal),
-            TagList list => list.Select(ConvertTag).ToList(),
-            TagByte tagByte => tagByte.Value,
-            TagShort tagShort => tagShort.Value,
-            TagInt tagInt => tagInt.Value,
-            TagLong tagLong => tagLong.Value,
-            TagFloat tagFloat => tagFloat.Value,
-            TagDouble tagDouble => tagDouble.Value,
-            TagString tagString => tagString.Value,
-            TagByteArray byteArray => byteArray.Value.ToArray(),
-            TagIntArray intArray => intArray.Value.ToArray(),
-            TagLongArray longArray => longArray.Value.ToArray(),
+            CompoundTag compound => ConvertCompound(compound),
+            ListTag list => list.Select(ConvertTag).ToList(),
+            ByteTag byteTag => byteTag.Value,
+            ShortTag shortTag => shortTag.Value,
+            IntTag intTag => intTag.Value,
+            LongTag longTag => longTag.Value,
+            FloatTag floatTag => floatTag.Value,
+            DoubleTag doubleTag => doubleTag.Value,
+            StringTag stringTag => stringTag.Value,
+            BoolTag boolTag => boolTag.Value,
+            ByteArrayTag byteArray => byteArray.Memory.ToArray(),
+            IntArrayTag intArray => intArray.Memory.ToArray(),
+            LongArrayTag longArray => longArray.Memory.ToArray(),
             null => null,
             _ => tag.ToString()
         };
+    }
+
+    private static IDictionary<string, object?> ConvertCompound(CompoundTag compound)
+    {
+        var dictionary = new Dictionary<string, object?>(compound.Count, StringComparer.Ordinal);
+        foreach (var child in (IEnumerable<KeyValuePair<string, Tag>>)compound)
+        {
+            dictionary[child.Key] = ConvertTag(child.Value);
+        }
+
+        return dictionary;
     }
 
     private static MetadataDocument BuildFallback(ReadOnlyMemory<byte> data)

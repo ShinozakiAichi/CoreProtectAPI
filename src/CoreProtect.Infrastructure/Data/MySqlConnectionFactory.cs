@@ -21,10 +21,15 @@ public sealed class MySqlConnectionFactory : IDbConnectionFactory
             throw new InvalidOperationException("CoreProtect connection string is not configured.");
         }
 
-        var connection = new MySqlConnection(connectionString)
+        var builder = new MySqlConnectionStringBuilder(connectionString);
+        var commandTimeout = _options.CurrentValue.CommandTimeout;
+        if (commandTimeout > TimeSpan.Zero)
         {
-            ConnectionTimeout = (uint)_options.CurrentValue.CommandTimeout.TotalSeconds
-        };
+            var seconds = (uint)Math.Clamp((int)Math.Ceiling(commandTimeout.TotalSeconds), 1, int.MaxValue);
+            builder.DefaultCommandTimeout = seconds;
+        }
+
+        var connection = new MySqlConnection(builder.ConnectionString);
 
         await connection.OpenAsync(cancellationToken).ConfigureAwait(false);
         return connection;

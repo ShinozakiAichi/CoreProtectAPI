@@ -2,6 +2,7 @@ using CoreProtect.Api.Configuration;
 using CoreProtect.Api.Middleware;
 using CoreProtect.Application;
 using CoreProtect.Infrastructure;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpLogging;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -27,6 +28,9 @@ builder.Services.Configure<ApiBehaviorOptions>(options =>
     options.SuppressModelStateInvalidFilter = true;
 });
 
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
 builder.Services.AddHttpLogging(logging =>
 {
     logging.LoggingFields = HttpLoggingFields.RequestMethod | HttpLoggingFields.RequestPath | HttpLoggingFields.ResponseStatusCode;
@@ -47,6 +51,12 @@ if (apiSettings.Cors.Origins.Length > 0)
             .AllowAnyMethod());
 }
 
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
 app.UseMiddleware<ErrorHandlingMiddleware>();
 app.UseHttpLogging();
 app.UseMiddleware<ApiKeyMiddleware>();
@@ -55,5 +65,8 @@ app.MapHealthChecks("/healthz");
 app.MapHealthChecks("/readyz");
 
 app.MapControllers();
+
+app.MapGet("/", () => Results.Redirect("/swagger", permanent: false))
+    .ExcludeFromDescription();
 
 app.Run();

@@ -1,65 +1,149 @@
 # CoreProtect API
 
-Read-only REST API that exposes CoreProtect audit data via HTTP. The service targets CoreProtect MySQL/MariaDB backends and surfaces blocks, container interactions, item transactions, commands, chat, sessions, and signs with decoded metadata.
+<p align="center">
+  <img src="https://img.shields.io/badge/.NET-8.0-512BD4?logo=dotnet&logoColor=white" alt=".NET 8"/>
+  <img src="https://img.shields.io/badge/MySQL-ready-4479A1?logo=mysql&logoColor=white" alt="MySQL"/>
+  <img src="https://img.shields.io/badge/License-MIT-green.svg" alt="MIT"/>
+</p>
 
-## Features
+> **EN**: Read-only REST API exposing CoreProtect audit trails (blocks, containers, items, commands, chat, sessions, signs) without touching the plugin.
+>
+> **RU**: REST API для безопасного чтения журнала CoreProtect — блоки, контейнеры, предметы, команды, чат, сессии и таблички, без вмешательства в оригинальный плагин.
 
-* REST endpoints under `/v1` with consistent filtering for world, users (including historical usernames), time ranges, coordinates, and pagination.
-* Safe SQL templates that respect CoreProtect indexing strategy and never touch `rowid`.
-* Binary metadata decoding (Java Serialization subset + NBT) with graceful fallback to raw hex/base64.
-* API key protection via `X-Api-Key`, structured error responses, and basic health probes (`/healthz`, `/readyz`).
-* Slow SQL logging (>500 ms), HTTP request logging, and configurable limits via environment variables.
-* Docker-ready `.NET 8` service with clean layering (Domain → Application → Infrastructure → API).
+---
 
-## Project structure
+## Navigation · Навигация
+
+1. [Vision & Features](#vision--features)
+2. [System map](#system-map)
+3. [Repository layout](#repository-layout)
+4. [Quick start (EN)](#quick-start-en)
+5. [Быстрый старт (RU)](#быстрый-старт-ru)
+6. [Configuration](#configuration)
+7. [Local development](#local-development)
+8. [Docker](#docker)
+9. [API catalogue](#api-catalogue)
+10. [Security & operations](#security--operations)
+11. [Troubleshooting](#troubleshooting)
+12. [License](#license)
+
+---
+
+## Vision & Features
+
+| Pillar | Details |
+| ------ | ------- |
+| **Predictable** | Uniform pagination (`limit/offset`), stable sorting, ISO-8601 timestamps. |
+| **Safe** | SQL templates are parameterised, API key enforcement lives behind `X-Api-Key`, secrets never land in logs. |
+| **Performant** | Target response <150 ms with tuned indices and read-only transactions. |
+| **Operable** | Health endpoints (`/healthz`, `/readyz`), slow query logging, structured log output. |
+
+## System map
+
+```
+┌──────────────────────────────┐
+│          CoreProtect         │
+│        MySQL / MariaDB       │
+└──────────────┬───────────────┘
+               │ read-only
+┌──────────────▼───────────────┐
+│    Infrastructure layer      │  ← SQL access, binary decoding, DI
+└──────────────┬───────────────┘
+               │ services
+┌──────────────▼───────────────┐
+│    Application layer         │  ← validation, orchestration
+└──────────────┬───────────────┘
+               │ DTOs
+┌──────────────▼───────────────┐
+│          API layer           │  ← ASP.NET Core controllers
+└──────────────┴───────────────┘
+```
+
+The domain stays pure; outer layers depend inward only.
+
+## Repository layout
 
 ```
 CoreProtectAPI
 ├── CoreProtectAPI.sln
+├── Dockerfile
 ├── README.md
 ├── src/
-│   ├── CoreProtect.Domain/       # Entities and value objects
-│   ├── CoreProtect.Application/  # Query services and abstractions
-│   ├── CoreProtect.Infrastructure/ # MySQL access, metadata decoding, DI
-│   └── CoreProtect.Api/          # ASP.NET Core host and controllers
+│   ├── CoreProtect.Domain/          # Entities, aggregates, value objects
+│   ├── CoreProtect.Application/     # Query services, DTO builders
+│   ├── CoreProtect.Infrastructure/  # Persistence adapters, configuration, DI
+│   └── CoreProtect.Api/             # ASP.NET Core host, controllers, filters
 └── tests/
-    └── CoreProtect.Tests/        # xUnit test suite
+    └── CoreProtect.Tests/           # xUnit specifications
 ```
 
-## Getting started
-
-### Requirements
-
-* .NET SDK 8.0
-* MySQL or MariaDB with CoreProtect schema accessible via read-only user (`cp_reader`).
-
-### Configuration
-
-Configuration is provided through `appsettings.json` and overridable environment variables.
-
-| Setting | Environment key | Default | Description |
-| ------- | ---------------- | ------- | ----------- |
-| Connection string | `ConnectionStrings__CoreProtect` | `Server=localhost;Port=3306;Database=coreprotect;Uid=cp_reader;Pwd=change-me;SslMode=None` | CoreProtect database connection. |
-| Default limit | `API__DefaultLimit` | `10` | Default page size when `limit` is omitted. |
-| Max limit | `API__MaxLimit` | `500` | Maximum allowed `limit`. |
-| API key toggle | `API__EnableApiKey` | `false` | Enables header based authentication. |
-| API key value | `API__ApiKey` | _empty_ | Value compared against `X-Api-Key`. |
-| CORS origins | `API__Cors__Origins` | `[]` | Comma-separated list of allowed origins. |
-
-### Running locally
+## Quick start (EN)
 
 ```bash
-# Restore dependencies
+# 1. Install dependencies
 dotnet restore
 
-# Run the web API
+# 2. Apply database connection (optional)
+export ConnectionStrings__CoreProtect="Server=localhost;Port=3306;Database=coreprotect;Uid=cp_reader;Pwd=change-me;SslMode=None"
+
+# 3. Run the API
 dotnet run --project src/CoreProtect.Api/CoreProtect.Api.csproj
 ```
 
-### Docker
+Open `http://localhost:8080/swagger` (development profile) for an interactive contract.
 
+## Быстрый старт (RU)
+
+```bash
+# 1. Установите зависимости
+dotnet restore
+
+# 2. Настройте строку подключения (при необходимости)
+export ConnectionStrings__CoreProtect="Server=localhost;Port=3306;Database=coreprotect;Uid=cp_reader;Pwd=change-me;SslMode=None"
+
+# 3. Запустите API
+dotnet run --project src/CoreProtect.Api/CoreProtect.Api.csproj
 ```
+
+Разработка по умолчанию слушает `http://localhost:8080`; Swagger доступен по `/swagger`.
+
+## Configuration
+
+Settings live in `appsettings.json` and can be overridden with environment variables (`__` replaces `:`).
+
+| Setting | Environment variable | Default | Purpose |
+| ------- | -------------------- | ------- | ------- |
+| Connection string | `ConnectionStrings__CoreProtect` | `Server=localhost;Port=3306;Database=coreprotect;Uid=cp_reader;Pwd=change-me;SslMode=None` | Read-only MySQL endpoint. |
+| Default limit | `API__DefaultLimit` | `10` | Fallback pagination size. |
+| Maximum limit | `API__MaxLimit` | `500` | Hard cap to protect the database. |
+| Require API key | `API__EnableApiKey` | `false` | Enable header-based auth. |
+| API key secret | `API__ApiKey` | _(empty)_ | Value matched against `X-Api-Key`. |
+| Allowed CORS origins | `API__Cors__Origins` | `[]` | CSV list of origins, e.g. `https://example.com`. |
+
+> 🔐 Keep secrets out of Git: `dotnet user-secrets`, container secrets, or your cloud provider.
+
+## Local development
+
+```bash
+# Format & analyzers
+dotnet format
+
+# Unit tests
+dotnet test
+
+# Hot reload
+dotnet watch --project src/CoreProtect.Api/CoreProtect.Api.csproj run
+```
+
+Recommended IDE extensions: C# Dev Kit / Rider, SQL syntax highlighting, EditorConfig support.
+
+## Docker
+
+```bash
+# Build
 docker build -t coreprotect-api .
+
+# Run
 docker run -p 8080:8080 \
   -e ConnectionStrings__CoreProtect="Server=db;Port=3306;Database=coreprotect;Uid=cp_reader;Pwd=secret;SslMode=None" \
   -e API__EnableApiKey=true \
@@ -67,62 +151,45 @@ docker run -p 8080:8080 \
   coreprotect-api
 ```
 
-### Testing
+Liveness: `/healthz` · Readiness: `/readyz`.
 
-```bash
-dotnet test
-```
+## API catalogue
 
-> **Note:** Ensure the .NET 8 SDK is installed before running the commands above.
+| Endpoint | Purpose |
+| -------- | ------- |
+| `GET /v1/worlds` | Enumerate worlds. |
+| `GET /v1/users/search?name=` | Fuzzy username search (≤50 results). |
+| `GET /v1/users/resolve?name=` | Resolve historical usernames. |
+| `GET /v1/blocks` | Block placement & break history. |
+| `GET /v1/containers` | Container interactions with metadata decoding. |
+| `GET /v1/items` | Item pickup/drop events. |
+| `GET /v1/commands` | Command executions (`message → command`). |
+| `GET /v1/chat` | Chat messages. |
+| `GET /v1/sessions` | Login/logout events. |
+| `GET /v1/signs` | Sign placements with coloured text. |
 
-## API overview
+Shared parameters: `limit`, `offset`, `sort`, `from`, `to`, `world`, `user`, `userLike`, coordinate ranges (`xMin/xMax`, `yMin/yMax`, `zMin/zMax`). Responses expose both Unix (`time`) and ISO-8601 (`timestamp`).
 
-* `GET /v1/worlds` – list available worlds.
-* `GET /v1/users/search?name=...` – partial username search (max 50 results).
-* `GET /v1/users/resolve?name=...` – resolve historical usernames.
-* `GET /v1/blocks` – block place/break history.
-* `GET /v1/containers` – container interactions with metadata decoding.
-* `GET /v1/items` – item pickup/drop events.
-* `GET /v1/commands` – command executions (`message` returned as `command`).
-* `GET /v1/chat` – chat messages.
-* `GET /v1/sessions` – login/logout events.
-* `GET /v1/signs` – sign placements/updates with lines and colors.
+## Security & operations
 
-All endpoints accept shared query parameters:
+* **Least privilege** — dedicate a `cp_reader` account with `SELECT` only.
+* **Auth** — enable `API__EnableApiKey`, rotate `API__ApiKey` regularly.
+* **Observability** — structured logs, slow query warnings (≥500 ms), health probes for orchestrators.
+* **Timeouts** — SQL 5 s, HTTP 10 s by default; tune via configuration for large deployments.
+* **Metadata decoding** — Java serialization → NBT → raw payload fallback (`metaJson` + original bytes preserved).
 
-| Parameter | Description |
-| --------- | ----------- |
-| `limit` | Page size (1–500, default configured via `API__DefaultLimit`). |
-| `offset` | Offset for pagination (default 0). |
-| `sort` | `asc` or `desc` (default `desc`). |
-| `from` / `to` | Unix seconds (inclusive/exclusive). |
-| `world` | Exact world name. |
-| `user` | Exact username (matches current or historical). |
-| `userLike` | Case-insensitive substring match. |
-| `xMin`–`xMax`, `yMin`–`yMax`, `zMin`–`zMax` | Coordinate bounds. |
+## Troubleshooting
 
-Endpoint specific filters are available (e.g. `action`, `blockTypeId`, `command`, `message`). Responses include both Unix time (`time`) and ISO-8601 (`timestamp`) values.
+| Symptom | Fix |
+| ------- | --- |
+| `Не удалось найти тип или имя пространства имен "Configuration"` | Add the abstractions package: `dotnet add src/CoreProtect.Infrastructure/CoreProtect.Infrastructure.csproj package Microsoft.Extensions.Configuration.Abstractions`. |
+| `Не удалось найти тип или имя пространства имен "IOptionsMonitor<>"` | Ensure the project references `Microsoft.Extensions.Options` and re-run `dotnet restore`. |
+| `Reference assembly ... CoreProtect.Infrastructure.dll could not be found` | Build the solution to generate the reference: `dotnet clean && dotnet build`. |
+| `Не удалось найти файл метаданных ... CoreProtect.Infrastructure.dll` | Same as above; make sure the Infrastructure project builds successfully before referencing it. |
+| Values from environment variables are ignored | Check casing: `API__Cors__Origins` not `Api__Cors__Origins`. Use `dotnet user-secrets list` to verify overrides. |
+| Database connection fails | Validate network reachability, firewall rules, and that the MySQL user has only `SELECT` on the CoreProtect schema. |
 
-## Security and operations
-
-* Create a dedicated database user (`cp_reader`) with `SELECT` privileges only.
-* Enable the API key header check for public deployments.
-* Monitor slow query logs – anything over 500 ms is logged at `Warning` level.
-* Health probes: `/healthz` for liveness, `/readyz` for readiness.
-
-## Metadata decoding
-
-The metadata decoder attempts, in order:
-
-1. Java serialization (supporting `HashMap`, `LinkedHashMap`, `ArrayList`, enums, Guava immutable map payloads).
-2. NBT (uncompressed, Java edition layout).
-3. Fallback to truncated hex/base64.
-
-Decoded JSON is emitted inline (`metaJson`), with raw payloads provided separately when decoding fails.
-
-## Indexing and performance
-
-The SQL queries assume the CoreProtect indices listed in the technical specification. Ensure they exist to maintain the SLO target (≤300 ms p95 for typical queries). Timeout defaults: 5 s for SQL commands, 10 s for HTTP requests.
+For deeper diagnostics run `dotnet build -v n` or `dotnet build -bl` (binary log) and inspect with MSBuild Structured Log Viewer.
 
 ## License
 

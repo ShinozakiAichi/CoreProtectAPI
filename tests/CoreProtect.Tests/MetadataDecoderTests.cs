@@ -33,10 +33,10 @@ public sealed class MetadataDecoderTests
     [Fact]
     public void Decode_NbtDocument_ReturnsDictionary()
     {
-        var compound = new TagCompound
+        var compound = new CompoundTag(null)
         {
-            { "name", new TagString("diamond_sword") },
-            { "damage", new TagInt(5) }
+            new StringTag("name", "diamond_sword"),
+            new IntTag("damage", 5)
         };
 
         using var stream = new MemoryStream();

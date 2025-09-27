@@ -132,7 +132,7 @@ SELECT DISTINCT id, current_user, uuid FROM name_history ORDER BY time DESC";
 
     public Task<IReadOnlyList<SignLogEntry>> GetSignsAsync(SignQueryParameters parameters, CancellationToken cancellationToken)
     {
-        var sql = $"{UserCte}\nSELECT sg.time, u.user AS user_name, w.world, sg.x, sg.y, sg.z, sg.action, sg.color, sg.glow, sg.line_1, sg.line_2, sg.line_3, sg.line_4, sg.line_5, sg.line_6, sg.line_7, sg.line_8\nFROM co_sign sg\nJOIN co_user u ON u.id = sg.user\nJOIN co_world w ON w.id = sg.wid\nWHERE {BuildBaseFilter("sg", "w", parameters.Base)}\nORDER BY sg.time {ToSqlOrder(parameters.Base.SortDirection)}\nLIMIT @limit OFFSET @offset";
+        var sql = $"{UserCte}\nSELECT sg.time, u.user AS user_name, w.world, sg.x, sg.y, sg.z, sg.action, sg.color, sg.color_secondary, sg.data, sg.waxed, sg.face, sg.line_1, sg.line_2, sg.line_3, sg.line_4, sg.line_5, sg.line_6, sg.line_7, sg.line_8\nFROM co_sign sg\nJOIN co_user u ON u.id = sg.user\nJOIN co_world w ON w.id = sg.wid\nWHERE {BuildBaseFilter("sg", "w", parameters.Base)}\nORDER BY sg.time {ToSqlOrder(parameters.Base.SortDirection)}\nLIMIT @limit OFFSET @offset";
 
         var dapperParameters = BuildBaseParameters(parameters.Base);
         return QueryAsync(sql, dapperParameters, MapSign, cancellationToken);
@@ -277,21 +277,91 @@ SELECT DISTINCT id, current_user, uuid FROM name_history ORDER BY time DESC";
     {
         var timestamp = DateTimeOffset.FromUnixTimeSeconds(record.GetInt64(0));
         var lines = new List<string>(8);
-        for (var i = 9; i <= 16; i++)
+        for (var i = 12; i <= 19; i++)
         {
             lines.Add(record.IsDBNull(i) ? string.Empty : record.GetString(i));
         }
 
-        return new SignLogEntry(
+        var action = MapSignAction(record);
+        var glowState = MapSignGlowState(record);
+        var entry = new SignLogEntry(
             record.GetInt64(0),
             timestamp,
             record.GetString(1),
             record.GetString(2),
             new Coordinates(record.GetInt32(3), record.GetInt32(4), record.GetInt32(5)),
-            record.GetString(6),
-            record.IsDBNull(7) ? null : record.GetString(7),
-            record.IsDBNull(8) ? null : record.GetString(8),
-            lines);
+            action,
+            ReadSignColor(record, 7),
+            ConvertGlowStateToString(glowState),
+            lines)
+        {
+            SecondaryColor = ReadSignColor(record, 8),
+            GlowState = glowState,
+            IsWaxed = !record.IsDBNull(10) && record.GetInt32(10) == 1,
+            Face = MapSignFace(record)
+        };
+
+        return entry;
+    }
+
+    private static SignAction MapSignAction(IDataRecord record)
+    {
+        if (record.IsDBNull(6))
+        {
+            return SignAction.Unknown;
+        }
+
+        return record.GetInt32(6) switch
+        {
+            0 => SignAction.Create,
+            1 => SignAction.Remove,
+            _ => SignAction.Unknown
+        };
+    }
+
+    private static SignGlowState MapSignGlowState(IDataRecord record)
+    {
+        if (record.IsDBNull(9))
+        {
+            return SignGlowState.None;
+        }
+
+        return record.GetInt32(9) switch
+        {
+            1 => SignGlowState.Front,
+            2 => SignGlowState.Back,
+            3 => SignGlowState.Both,
+            _ => SignGlowState.None
+        };
+    }
+
+    private static string? ConvertGlowStateToString(SignGlowState state) => state switch
+    {
+        SignGlowState.Front => "front",
+        SignGlowState.Back => "back",
+        SignGlowState.Both => "both",
+        _ => null
+    };
+
+    private static string? ReadSignColor(IDataRecord record, int ordinal)
+    {
+        if (record.IsDBNull(ordinal))
+        {
+            return null;
+        }
+
+        var rgb = record.GetInt32(ordinal);
+        return rgb <= 0 ? null : $"#{rgb:X6}";
+    }
+
+    private static SignFace MapSignFace(IDataRecord record)
+    {
+        if (record.IsDBNull(11))
+        {
+            return SignFace.Front;
+        }
+
+        return record.GetInt32(11) == 1 ? SignFace.Back : SignFace.Front;
     }
 
     private static int ConvertBlockAction(BlockAction action) => action switch

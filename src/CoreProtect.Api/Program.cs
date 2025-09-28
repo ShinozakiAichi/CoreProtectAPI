@@ -2,10 +2,13 @@ using CoreProtect.Api.Configuration;
 using CoreProtect.Api.Middleware;
 using CoreProtect.Application;
 using CoreProtect.Infrastructure;
+using CoreProtect.Infrastructure.HealthChecks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpLogging;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -37,7 +40,9 @@ builder.Services.AddHttpLogging(logging =>
 });
 
 builder.Services.AddCors();
-builder.Services.AddHealthChecks();
+builder.Services.AddHealthChecks()
+    .AddCheck("self", () => HealthCheckResult.Healthy(), tags: new[] { "live" })
+    .AddCheck<CoreProtectSchemaHealthCheck>("coreprotect_schema", tags: new[] { "ready" });
 
 var app = builder.Build();
 
@@ -61,8 +66,15 @@ app.UseMiddleware<ErrorHandlingMiddleware>();
 app.UseHttpLogging();
 app.UseMiddleware<ApiKeyMiddleware>();
 
-app.MapHealthChecks("/healthz");
-app.MapHealthChecks("/readyz");
+app.MapHealthChecks("/healthz", new HealthCheckOptions
+{
+    Predicate = check => check.Tags.Contains("live")
+});
+
+app.MapHealthChecks("/readyz", new HealthCheckOptions
+{
+    Predicate = check => check.Tags.Contains("ready")
+});
 
 app.MapControllers();
 

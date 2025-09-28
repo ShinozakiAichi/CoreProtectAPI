@@ -2,6 +2,7 @@ using CoreProtect.Api.Configuration;
 using CoreProtect.Api.Middleware;
 using CoreProtect.Application;
 using CoreProtect.Infrastructure;
+using CoreProtect.Infrastructure.HealthChecks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpLogging;
 using Microsoft.AspNetCore.Mvc;

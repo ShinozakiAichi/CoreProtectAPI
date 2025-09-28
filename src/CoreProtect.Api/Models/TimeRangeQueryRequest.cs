@@ -18,7 +18,7 @@ public sealed class TimeRangeQueryRequest : SimplePaginationRequest
         }
     }
 
-    public TimeRangeQueryParameters Build(ApiSettings settings)
+    public new TimeRangeQueryParameters Build(ApiSettings settings)
     {
         var pagination = base.BuildPagination(settings);
         return new TimeRangeQueryParameters(From, To, pagination);

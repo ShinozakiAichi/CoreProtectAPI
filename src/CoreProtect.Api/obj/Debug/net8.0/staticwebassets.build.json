@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "QP8CFIL5cbh/KWvRboIjdpXKcV6yUkK2urjIWiUUIKU=",
+  "Source": "CoreProtect.Api",
+  "BasePath": "_content/CoreProtect.Api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

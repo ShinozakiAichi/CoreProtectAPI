@@ -3,12 +3,32 @@
   "WorkspaceRootPath": "C:\\Users\\allen\\source\\repos\\ShinozakiAichi\\CoreProtectAPI\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{359EB147-E4A3-41BC-8DA5-8B61D0078123}|src\\CoreProtect.Api\\CoreProtect.Api.csproj|c:\\users\\allen\\source\\repos\\shinozakiaichi\\coreprotectapi\\src\\coreprotect.api\\coreprotect.api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{359EB147-E4A3-41BC-8DA5-8B61D0078123}|src\\CoreProtect.Api\\CoreProtect.Api.csproj|solutionrelative:src\\coreprotect.api\\coreprotect.api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+      "AbsoluteMoniker": "D:0:0:{359EB147-E4A3-41BC-8DA5-8B61D0078123}|src\\CoreProtect.Api\\CoreProtect.Api.csproj|c:\\users\\allen\\source\\repos\\shinozakiaichi\\coreprotectapi\\src\\coreprotect.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{359EB147-E4A3-41BC-8DA5-8B61D0078123}|src\\CoreProtect.Api\\CoreProtect.Api.csproj|solutionrelative:src\\coreprotect.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{359EB147-E4A3-41BC-8DA5-8B61D0078123}|src\\CoreProtect.Api\\CoreProtect.Api.csproj|c:\\users\\allen\\source\\repos\\shinozakiaichi\\coreprotectapi\\src\\coreprotect.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{359EB147-E4A3-41BC-8DA5-8B61D0078123}|src\\CoreProtect.Api\\CoreProtect.Api.csproj|solutionrelative:src\\coreprotect.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B1E1D0B5-3B37-4E27-9066-2D516003C03D}|src\\CoreProtect.Infrastructure\\CoreProtect.Infrastructure.csproj|c:\\users\\allen\\source\\repos\\shinozakiaichi\\coreprotectapi\\src\\coreprotect.infrastructure\\decoding\\javaserializationparser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B1E1D0B5-3B37-4E27-9066-2D516003C03D}|src\\CoreProtect.Infrastructure\\CoreProtect.Infrastructure.csproj|solutionrelative:src\\coreprotect.infrastructure\\decoding\\javaserializationparser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B1E1D0B5-3B37-4E27-9066-2D516003C03D}|src\\CoreProtect.Infrastructure\\CoreProtect.Infrastructure.csproj|c:\\users\\allen\\source\\repos\\shinozakiaichi\\coreprotectapi\\src\\coreprotect.infrastructure\\coreprotect.infrastructure.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
       "RelativeMoniker": "D:0:0:{B1E1D0B5-3B37-4E27-9066-2D516003C03D}|src\\CoreProtect.Infrastructure\\CoreProtect.Infrastructure.csproj|solutionrelative:src\\coreprotect.infrastructure\\coreprotect.infrastructure.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B1E1D0B5-3B37-4E27-9066-2D516003C03D}|src\\CoreProtect.Infrastructure\\CoreProtect.Infrastructure.csproj|c:\\users\\allen\\source\\repos\\shinozakiaichi\\coreprotectapi\\src\\coreprotect.infrastructure\\data\\mysqlconnectionfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B1E1D0B5-3B37-4E27-9066-2D516003C03D}|src\\CoreProtect.Infrastructure\\CoreProtect.Infrastructure.csproj|solutionrelative:src\\coreprotect.infrastructure\\data\\mysqlconnectionfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B1E1D0B5-3B37-4E27-9066-2D516003C03D}|src\\CoreProtect.Infrastructure\\CoreProtect.Infrastructure.csproj|c:\\users\\allen\\source\\repos\\shinozakiaichi\\coreprotectapi\\src\\coreprotect.infrastructure\\decoding\\metadatadecoder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B1E1D0B5-3B37-4E27-9066-2D516003C03D}|src\\CoreProtect.Infrastructure\\CoreProtect.Infrastructure.csproj|solutionrelative:src\\coreprotect.infrastructure\\decoding\\metadatadecoder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{359EB147-E4A3-41BC-8DA5-8B61D0078123}|src\\CoreProtect.Api\\CoreProtect.Api.csproj|c:\\users\\allen\\source\\repos\\shinozakiaichi\\coreprotectapi\\src\\coreprotect.api\\coreprotect.api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{359EB147-E4A3-41BC-8DA5-8B61D0078123}|src\\CoreProtect.Api\\CoreProtect.Api.csproj|solutionrelative:src\\coreprotect.api\\coreprotect.api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
       "AbsoluteMoniker": "D:0:0:{5AE70421-BB93-41A8-82FF-DFFF09E0A5A1}|src\\CoreProtect.Application\\CoreProtect.Application.csproj|c:\\users\\allen\\source\\repos\\shinozakiaichi\\coreprotectapi\\src\\coreprotect.application\\coreprotect.application.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
@@ -35,19 +55,79 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\allen\\source\\repos\\ShinozakiAichi\\CoreProtectAPI\\src\\CoreProtect.Api\\appsettings.json",
+              "RelativeDocumentMoniker": "src\\CoreProtect.Api\\appsettings.json",
+              "ToolTip": "C:\\Users\\allen\\source\\repos\\ShinozakiAichi\\CoreProtectAPI\\src\\CoreProtect.Api\\appsettings.json",
+              "RelativeToolTip": "src\\CoreProtect.Api\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAACOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-09-27T18:14:40.57Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\allen\\source\\repos\\ShinozakiAichi\\CoreProtectAPI\\src\\CoreProtect.Api\\Program.cs",
+              "RelativeDocumentMoniker": "src\\CoreProtect.Api\\Program.cs",
+              "ToolTip": "C:\\Users\\allen\\source\\repos\\ShinozakiAichi\\CoreProtectAPI\\src\\CoreProtect.Api\\Program.cs",
+              "RelativeToolTip": "src\\CoreProtect.Api\\Program.cs",
+              "ViewState": "AgIAACgAAAAAAAAAAAAMwEEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-27T18:05:46.506Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "MySqlConnectionFactory.cs",
+              "DocumentMoniker": "C:\\Users\\allen\\source\\repos\\ShinozakiAichi\\CoreProtectAPI\\src\\CoreProtect.Infrastructure\\Data\\MySqlConnectionFactory.cs",
+              "RelativeDocumentMoniker": "src\\CoreProtect.Infrastructure\\Data\\MySqlConnectionFactory.cs",
+              "ToolTip": "C:\\Users\\allen\\source\\repos\\ShinozakiAichi\\CoreProtectAPI\\src\\CoreProtect.Infrastructure\\Data\\MySqlConnectionFactory.cs",
+              "RelativeToolTip": "src\\CoreProtect.Infrastructure\\Data\\MySqlConnectionFactory.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAhwBsAAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-27T17:44:22.401Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "MetadataDecoder.cs",
+              "DocumentMoniker": "C:\\Users\\allen\\source\\repos\\ShinozakiAichi\\CoreProtectAPI\\src\\CoreProtect.Infrastructure\\Decoding\\MetadataDecoder.cs",
+              "RelativeDocumentMoniker": "src\\CoreProtect.Infrastructure\\Decoding\\MetadataDecoder.cs",
+              "ToolTip": "C:\\Users\\allen\\source\\repos\\ShinozakiAichi\\CoreProtectAPI\\src\\CoreProtect.Infrastructure\\Decoding\\MetadataDecoder.cs",
+              "RelativeToolTip": "src\\CoreProtect.Infrastructure\\Decoding\\MetadataDecoder.cs",
+              "ViewState": "AgIAADsAAAAAAAAAAAAlwE0AAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-27T17:43:59.152Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "JavaSerializationParser.cs",
+              "DocumentMoniker": "C:\\Users\\allen\\source\\repos\\ShinozakiAichi\\CoreProtectAPI\\src\\CoreProtect.Infrastructure\\Decoding\\JavaSerializationParser.cs",
+              "RelativeDocumentMoniker": "src\\CoreProtect.Infrastructure\\Decoding\\JavaSerializationParser.cs",
+              "ToolTip": "C:\\Users\\allen\\source\\repos\\ShinozakiAichi\\CoreProtectAPI\\src\\CoreProtect.Infrastructure\\Decoding\\JavaSerializationParser.cs",
+              "RelativeToolTip": "src\\CoreProtect.Infrastructure\\Decoding\\JavaSerializationParser.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGoBAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-27T17:43:55.882Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
               "Title": "CoreProtect.Api.csproj",
               "DocumentMoniker": "C:\\Users\\allen\\source\\repos\\ShinozakiAichi\\CoreProtectAPI\\src\\CoreProtect.Api\\CoreProtect.Api.csproj",
               "RelativeDocumentMoniker": "src\\CoreProtect.Api\\CoreProtect.Api.csproj",
               "ToolTip": "C:\\Users\\allen\\source\\repos\\ShinozakiAichi\\CoreProtectAPI\\src\\CoreProtect.Api\\CoreProtect.Api.csproj",
               "RelativeToolTip": "src\\CoreProtect.Api\\CoreProtect.Api.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-09-27T17:13:02.768Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-27T17:13:02.768Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 7,
               "Title": "CoreProtect.Application.csproj",
               "DocumentMoniker": "C:\\Users\\allen\\source\\repos\\ShinozakiAichi\\CoreProtectAPI\\src\\CoreProtect.Application\\CoreProtect.Application.csproj",
               "RelativeDocumentMoniker": "src\\CoreProtect.Application\\CoreProtect.Application.csproj",
@@ -59,7 +139,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 8,
               "Title": "CoreProtect.Domain.csproj",
               "DocumentMoniker": "C:\\Users\\allen\\source\\repos\\ShinozakiAichi\\CoreProtectAPI\\src\\CoreProtect.Domain\\CoreProtect.Domain.csproj",
               "RelativeDocumentMoniker": "src\\CoreProtect.Domain\\CoreProtect.Domain.csproj",
@@ -71,20 +151,19 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "CoreProtect.Infrastructure.csproj",
               "DocumentMoniker": "C:\\Users\\allen\\source\\repos\\ShinozakiAichi\\CoreProtectAPI\\src\\CoreProtect.Infrastructure\\CoreProtect.Infrastructure.csproj",
               "RelativeDocumentMoniker": "src\\CoreProtect.Infrastructure\\CoreProtect.Infrastructure.csproj",
               "ToolTip": "C:\\Users\\allen\\source\\repos\\ShinozakiAichi\\CoreProtectAPI\\src\\CoreProtect.Infrastructure\\CoreProtect.Infrastructure.csproj",
               "RelativeToolTip": "src\\CoreProtect.Infrastructure\\CoreProtect.Infrastructure.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-09-27T17:12:56.519Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-27T17:12:56.519Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 9,
               "Title": "CoreProtect.Tests.csproj",
               "DocumentMoniker": "C:\\Users\\allen\\source\\repos\\ShinozakiAichi\\CoreProtectAPI\\tests\\CoreProtect.Tests\\CoreProtect.Tests.csproj",
               "RelativeDocumentMoniker": "tests\\CoreProtect.Tests\\CoreProtect.Tests.csproj",

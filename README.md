@@ -137,6 +137,10 @@ dotnet watch --project src/CoreProtect.Api/CoreProtect.Api.csproj run
 
 Recommended IDE extensions: C# Dev Kit / Rider, SQL syntax highlighting, EditorConfig support.
 
+## Continuous integration
+
+Automated builds run on GitHub Actions (`.github/workflows/dotnet.yml`) for every push and pull request targeting `main`. The pipeline restores dependencies, builds the solution in Release mode, executes the full test suite, and publishes `.trx` results as workflow artifacts for post-run inspection.
+
 ## Docker
 
 ```bash

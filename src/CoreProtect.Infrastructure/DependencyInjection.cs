@@ -14,6 +14,7 @@ public static class DependencyInjection
         services.Configure<CoreProtectDatabaseOptions>(configuration.GetSection(CoreProtectDatabaseOptions.SectionName));
         services.AddSingleton<IDbConnectionFactory, MySqlConnectionFactory>();
         services.AddSingleton<IMetadataDecoder, MetadataDecoder>();
+        services.AddSingleton<ICoreProtectSchemaVerifier, CoreProtectSchemaVerifier>();
         services.AddTransient<ICoreProtectReadRepository, CoreProtectReadRepository>();
         return services;
     }

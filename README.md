@@ -151,7 +151,7 @@ docker run -p 8080:8080 \
   coreprotect-api
 ```
 
-Liveness: `/healthz` · Readiness: `/readyz`.
+Liveness: `/healthz` · Readiness: `/readyz` (validates CoreProtect schema tables).
 
 ## API catalogue
 

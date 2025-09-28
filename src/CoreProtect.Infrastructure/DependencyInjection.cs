@@ -2,6 +2,7 @@ using CoreProtect.Application.Abstractions;
 using CoreProtect.Infrastructure.Configuration;
 using CoreProtect.Infrastructure.Data;
 using CoreProtect.Infrastructure.Decoding;
+using CoreProtect.Infrastructure.HealthChecks;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -15,6 +16,7 @@ public static class DependencyInjection
         services.AddSingleton<IDbConnectionFactory, MySqlConnectionFactory>();
         services.AddSingleton<IMetadataDecoder, MetadataDecoder>();
         services.AddSingleton<ICoreProtectSchemaVerifier, CoreProtectSchemaVerifier>();
+        services.AddSingleton<CoreProtectSchemaHealthCheck>();
         services.AddTransient<ICoreProtectReadRepository, CoreProtectReadRepository>();
         return services;
     }

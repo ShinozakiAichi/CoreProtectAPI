@@ -7,7 +7,7 @@ public sealed record DatabaseLockDto(int RowId, int? Status, long? Time, string?
     public static DatabaseLockDto FromDomain(DatabaseLockInfo info)
     {
         var timestamp = info.Timestamp?.ToUniversalTime().ToString("O");
-        var isLocked = info.Status is null ? null : info.Status != 0;
+        var isLocked = info.Status is null ? (bool?)null : info.Status != 0;
         return new DatabaseLockDto(info.RowId, info.Status, info.Time, timestamp, isLocked);
     }
 }

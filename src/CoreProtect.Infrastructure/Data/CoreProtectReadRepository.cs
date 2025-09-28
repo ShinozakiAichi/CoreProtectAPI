@@ -92,7 +92,7 @@ SELECT DISTINCT id, current_user, uuid FROM name_history ORDER BY time DESC";
 
     public Task<IReadOnlyList<ContainerLogEntry>> GetContainersAsync(ContainerQueryParameters parameters, CancellationToken cancellationToken)
     {
-        var sql = $"{UserCte}\nSELECT c.time, u.user AS user_name, w.world, c.x, c.y, c.z, c.action, c.type, c.data, c.amount, c.metadata, c.rolled_back\nFROM co_container c\nJOIN co_user u ON u.id = c.user\nJOIN co_world w ON w.id = c.wid\nWHERE {BuildBaseFilter("c", "w", parameters.Base)}\nORDER BY c.time {ToSqlOrder(parameters.Base.SortDirection)}\nLIMIT @limit OFFSET @offset";
+        var sql = $"{UserCte}\nSELECT c.time, u.user AS user_name, w.world, c.x, c.y, c.z, c.action, c.type, mm.material, c.data, c.amount, c.metadata, c.rolled_back\nFROM co_container c\nJOIN co_user u ON u.id = c.user\nJOIN co_world w ON w.id = c.wid\nLEFT JOIN co_material_map mm ON mm.id = c.type\nWHERE {BuildBaseFilter("c", "w", parameters.Base)}\nORDER BY c.time {ToSqlOrder(parameters.Base.SortDirection)}\nLIMIT @limit OFFSET @offset";
 
         var dapperParameters = BuildBaseParameters(parameters.Base);
         return QueryAsync(sql, dapperParameters, MapContainer, cancellationToken);
@@ -100,7 +100,7 @@ SELECT DISTINCT id, current_user, uuid FROM name_history ORDER BY time DESC";
 
     public Task<IReadOnlyList<ItemLogEntry>> GetItemsAsync(ItemQueryParameters parameters, CancellationToken cancellationToken)
     {
-        var sql = $"{UserCte}\nSELECT i.time, u.user AS user_name, w.world, i.x, i.y, i.z, i.action, i.type, i.data, i.amount, i.rolled_back\nFROM co_item i\nJOIN co_user u ON u.id = i.user\nJOIN co_world w ON w.id = i.wid\nWHERE {BuildBaseFilter("i", "w", parameters.Base)}\nORDER BY i.time {ToSqlOrder(parameters.Base.SortDirection)}\nLIMIT @limit OFFSET @offset";
+        var sql = $"{UserCte}\nSELECT i.time, u.user AS user_name, w.world, i.x, i.y, i.z, i.action, i.type, mm.material, i.data, i.amount, i.rolled_back\nFROM co_item i\nJOIN co_user u ON u.id = i.user\nJOIN co_world w ON w.id = i.wid\nLEFT JOIN co_material_map mm ON mm.id = i.type\nWHERE {BuildBaseFilter("i", "w", parameters.Base)}\nORDER BY i.time {ToSqlOrder(parameters.Base.SortDirection)}\nLIMIT @limit OFFSET @offset";
 
         var dapperParameters = BuildBaseParameters(parameters.Base);
         return QueryAsync(sql, dapperParameters, MapItem, cancellationToken);
@@ -139,6 +139,95 @@ SELECT DISTINCT id, current_user, uuid FROM name_history ORDER BY time DESC";
         var dapperParameters = BuildBaseParameters(parameters.Base);
         return QueryAsync(sql, dapperParameters, MapSign, cancellationToken);
     }
+
+    public Task<IReadOnlyList<ArtMapEntry>> GetArtMapAsync(Pagination pagination, CancellationToken cancellationToken)
+    {
+        const string sql = "SELECT rowid, id, art FROM co_art_map ORDER BY id LIMIT @limit OFFSET @offset";
+        var parameters = new DynamicParameters();
+        parameters.Add("@limit", pagination.Limit);
+        parameters.Add("@offset", pagination.Offset);
+        return QueryAsync(sql, parameters, MapArtMap, cancellationToken);
+    }
+
+    public Task<IReadOnlyList<BlockDataMapEntry>> GetBlockDataMapAsync(Pagination pagination, CancellationToken cancellationToken)
+    {
+        const string sql = "SELECT rowid, id, data FROM co_blockdata_map ORDER BY id LIMIT @limit OFFSET @offset";
+        var parameters = new DynamicParameters();
+        parameters.Add("@limit", pagination.Limit);
+        parameters.Add("@offset", pagination.Offset);
+        return QueryAsync(sql, parameters, MapBlockDataMap, cancellationToken);
+    }
+
+    public Task<IReadOnlyList<EntityMapEntry>> GetEntityMapAsync(Pagination pagination, CancellationToken cancellationToken)
+    {
+        const string sql = "SELECT rowid, id, entity FROM co_entity_map ORDER BY id LIMIT @limit OFFSET @offset";
+        var parameters = new DynamicParameters();
+        parameters.Add("@limit", pagination.Limit);
+        parameters.Add("@offset", pagination.Offset);
+        return QueryAsync(sql, parameters, MapEntityMap, cancellationToken);
+    }
+
+    public Task<IReadOnlyList<MaterialMapEntry>> GetMaterialMapAsync(Pagination pagination, CancellationToken cancellationToken)
+    {
+        const string sql = "SELECT rowid, id, material FROM co_material_map ORDER BY id LIMIT @limit OFFSET @offset";
+        var parameters = new DynamicParameters();
+        parameters.Add("@limit", pagination.Limit);
+        parameters.Add("@offset", pagination.Offset);
+        return QueryAsync(sql, parameters, MapMaterialMap, cancellationToken);
+    }
+
+    public Task<IReadOnlyList<DatabaseLockInfo>> GetDatabaseLocksAsync(CancellationToken cancellationToken)
+    {
+        const string sql = "SELECT rowid, status, time FROM co_database_lock ORDER BY rowid";
+        return QueryAsync(sql, new DynamicParameters(), MapDatabaseLock, cancellationToken);
+    }
+
+    public Task<IReadOnlyList<EntitySnapshot>> GetEntitiesAsync(TimeRangeQueryParameters parameters, CancellationToken cancellationToken)
+    {
+        const string sql = "SELECT rowid, time, data FROM co_entity WHERE (@from IS NULL OR time >= @from) AND (@to IS NULL OR time < @to) ORDER BY time DESC LIMIT @limit OFFSET @offset";
+        var dapperParameters = new DynamicParameters();
+        dapperParameters.Add("@from", parameters.From);
+        dapperParameters.Add("@to", parameters.To);
+        dapperParameters.Add("@limit", parameters.Pagination.Limit);
+        dapperParameters.Add("@offset", parameters.Pagination.Offset);
+        return QueryAsync(sql, dapperParameters, MapEntitySnapshot, cancellationToken);
+    }
+
+    public Task<IReadOnlyList<SkullEntry>> GetSkullsAsync(TimeRangeQueryParameters parameters, CancellationToken cancellationToken)
+    {
+        const string sql = "SELECT rowid, time, owner FROM co_skull WHERE (@from IS NULL OR time >= @from) AND (@to IS NULL OR time < @to) ORDER BY time DESC LIMIT @limit OFFSET @offset";
+        var dapperParameters = new DynamicParameters();
+        dapperParameters.Add("@from", parameters.From);
+        dapperParameters.Add("@to", parameters.To);
+        dapperParameters.Add("@limit", parameters.Pagination.Limit);
+        dapperParameters.Add("@offset", parameters.Pagination.Offset);
+        return QueryAsync(sql, dapperParameters, MapSkull, cancellationToken);
+    }
+
+    public Task<IReadOnlyList<UserRecord>> GetUsersAsync(Pagination pagination, CancellationToken cancellationToken)
+    {
+        const string sql = "SELECT rowid, time, user, uuid FROM co_user ORDER BY time DESC LIMIT @limit OFFSET @offset";
+        var parameters = new DynamicParameters();
+        parameters.Add("@limit", pagination.Limit);
+        parameters.Add("@offset", pagination.Offset);
+        return QueryAsync(sql, parameters, MapUserRecord, cancellationToken);
+    }
+
+    public Task<IReadOnlyList<UsernameLogEntry>> GetUsernameLogAsync(Pagination pagination, CancellationToken cancellationToken)
+    {
+        const string sql = "SELECT ul.rowid, ul.time, ul.uuid, ul.user, u.user AS current_user FROM co_username_log ul LEFT JOIN co_user u ON u.uuid = ul.uuid ORDER BY ul.time DESC LIMIT @limit OFFSET @offset";
+        var parameters = new DynamicParameters();
+        parameters.Add("@limit", pagination.Limit);
+        parameters.Add("@offset", pagination.Offset);
+        return QueryAsync(sql, parameters, MapUsernameLog, cancellationToken);
+    }
+
+    public Task<IReadOnlyList<VersionInfo>> GetVersionsAsync(CancellationToken cancellationToken)
+    {
+        const string sql = "SELECT rowid, time, version FROM co_version ORDER BY time DESC";
+        return QueryAsync(sql, new DynamicParameters(), MapVersion, cancellationToken);
+    }
+
 
     private async Task<IReadOnlyList<T>> QueryAsync<T>(
         string sql,
@@ -193,9 +282,9 @@ SELECT DISTINCT id, current_user, uuid FROM name_history ORDER BY time DESC";
     {
         var timestamp = DateTimeOffset.FromUnixTimeSeconds(record.GetInt64(0));
         var metadata = MetadataDocument.Empty;
-        if (!record.IsDBNull(10))
+        if (!record.IsDBNull(11))
         {
-            var raw = (byte[])record.GetValue(10);
+            var raw = (byte[])record.GetValue(11);
             metadata = _metadataDecoder.Decode(raw);
         }
 
@@ -208,10 +297,11 @@ SELECT DISTINCT id, current_user, uuid FROM name_history ORDER BY time DESC";
             new Coordinates(record.GetInt32(3), record.GetInt32(4), record.GetInt32(5)),
             action,
             record.GetInt32(7),
-            record.GetInt32(8),
+            record.IsDBNull(8) ? null : record.GetString(8),
             record.GetInt32(9),
+            record.GetInt32(10),
             metadata,
-            ReadBooleanFromTinyInt(record, 11));
+            ReadBooleanFromTinyInt(record, 12));
     }
 
     private ItemLogEntry MapItem(IDataRecord record)
@@ -233,9 +323,10 @@ SELECT DISTINCT id, current_user, uuid FROM name_history ORDER BY time DESC";
             new Coordinates(record.GetInt32(3), record.GetInt32(4), record.GetInt32(5)),
             action,
             record.GetInt32(7),
-            record.GetInt32(8),
+            record.IsDBNull(8) ? null : record.GetString(8),
             record.GetInt32(9),
-            ReadBooleanFromTinyInt(record, 10));
+            record.GetInt32(10),
+            ReadBooleanFromTinyInt(record, 11));
     }
 
     private CommandLogEntry MapCommand(IDataRecord record)
@@ -398,6 +489,114 @@ SELECT DISTINCT id, current_user, uuid FROM name_history ORDER BY time DESC";
     }
 
     private static string ToSqlOrder(SortDirection direction) => direction == SortDirection.Ascending ? "ASC" : "DESC";
+
+
+    private static ArtMapEntry MapArtMap(IDataRecord record) =>
+        new(record.GetInt32(0), record.IsDBNull(1) ? null : record.GetInt32(1), record.IsDBNull(2) ? null : record.GetString(2));
+
+    private static BlockDataMapEntry MapBlockDataMap(IDataRecord record) =>
+        new(record.GetInt32(0), record.IsDBNull(1) ? null : record.GetInt32(1), record.IsDBNull(2) ? null : record.GetString(2));
+
+    private static EntityMapEntry MapEntityMap(IDataRecord record) =>
+        new(record.GetInt32(0), record.IsDBNull(1) ? null : record.GetInt32(1), record.IsDBNull(2) ? null : record.GetString(2));
+
+    private static MaterialMapEntry MapMaterialMap(IDataRecord record) =>
+        new(record.GetInt32(0), record.IsDBNull(1) ? null : record.GetInt32(1), record.IsDBNull(2) ? null : record.GetString(2));
+
+    private static DatabaseLockInfo MapDatabaseLock(IDataRecord record)
+    {
+        var status = ReadNullableInt32(record, 1);
+        var time = ReadNullableInt64(record, 2);
+        return new DatabaseLockInfo(record.GetInt32(0), status, time, ToTimestamp(time));
+    }
+
+    private static EntitySnapshot MapEntitySnapshot(IDataRecord record)
+    {
+        var time = ReadNullableInt64(record, 1);
+        return new EntitySnapshot(record.GetInt32(0), time, ToTimestamp(time), ReadBlob(record, 2));
+    }
+
+    private static SkullEntry MapSkull(IDataRecord record)
+    {
+        var time = ReadNullableInt64(record, 1);
+        return new SkullEntry(record.GetInt32(0), time, ToTimestamp(time), record.IsDBNull(2) ? null : record.GetString(2));
+    }
+
+    private static UserRecord MapUserRecord(IDataRecord record)
+    {
+        var time = ReadNullableInt64(record, 1);
+        return new UserRecord(
+            record.GetInt32(0),
+            time,
+            ToTimestamp(time),
+            record.IsDBNull(2) ? null : record.GetString(2),
+            record.IsDBNull(3) ? null : record.GetString(3));
+    }
+
+    private static UsernameLogEntry MapUsernameLog(IDataRecord record)
+    {
+        var time = ReadNullableInt64(record, 1);
+        return new UsernameLogEntry(
+            record.GetInt32(0),
+            time,
+            ToTimestamp(time),
+            record.IsDBNull(2) ? null : record.GetString(2),
+            record.IsDBNull(3) ? null : record.GetString(3),
+            record.IsDBNull(4) ? null : record.GetString(4));
+    }
+
+    private static VersionInfo MapVersion(IDataRecord record)
+    {
+        var time = ReadNullableInt64(record, 1);
+        return new VersionInfo(record.GetInt32(0), time, ToTimestamp(time), record.IsDBNull(2) ? null : record.GetString(2));
+    }
+
+    private static long? ReadNullableInt64(IDataRecord record, int ordinal)
+    {
+        if (record.IsDBNull(ordinal))
+        {
+            return null;
+        }
+
+        var value = record.GetValue(ordinal);
+        return value switch
+        {
+            long longValue => longValue,
+            int intValue => intValue,
+            uint uintValue => uintValue,
+            short shortValue => shortValue,
+            ushort ushortValue => ushortValue,
+            byte byteValue => byteValue,
+            sbyte sbyteValue => sbyteValue,
+            _ => Convert.ToInt64(value, CultureInfo.InvariantCulture)
+        };
+    }
+
+    private static int? ReadNullableInt32(IDataRecord record, int ordinal)
+    {
+        if (record.IsDBNull(ordinal))
+        {
+            return null;
+        }
+
+        var value = record.GetValue(ordinal);
+        return value switch
+        {
+            int intValue => intValue,
+            short shortValue => shortValue,
+            ushort ushortValue => ushortValue,
+            byte byteValue => byteValue,
+            sbyte sbyteValue => sbyteValue,
+            long longValue => (int)longValue,
+            _ => Convert.ToInt32(value, CultureInfo.InvariantCulture)
+        };
+    }
+
+    private static DateTimeOffset? ToTimestamp(long? time) =>
+        time.HasValue ? DateTimeOffset.FromUnixTimeSeconds(time.Value) : null;
+
+    private static byte[] ReadBlob(IDataRecord record, int ordinal) =>
+        record.IsDBNull(ordinal) ? Array.Empty<byte>() : (byte[])record.GetValue(ordinal);
 
     private static bool ReadBooleanFromTinyInt(IDataRecord record, int ordinal)
     {

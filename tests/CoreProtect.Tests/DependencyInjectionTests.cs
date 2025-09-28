@@ -13,7 +13,10 @@ public sealed class DependencyInjectionTests
         var services = new ServiceCollection();
         var configuration = new ConfigurationBuilder().Build();
 
-        var exception = Record.Exception(() => services.AddInfrastructure(configuration));
+        var exception = Record.Exception(() =>
+        {
+            services.AddInfrastructure(configuration);
+        });
 
         Assert.Null(exception);
     }

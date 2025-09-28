@@ -65,6 +65,10 @@
               "target": "Package",
               "version": "[8.0.6, )"
             },
+            "Microsoft.Extensions.Diagnostics.HealthChecks": {
+              "target": "Package",
+              "version": "[8.0.5, )"
+            },
             "Microsoft.Extensions.Options": {
               "target": "Package",
               "version": "[8.0.0, )"

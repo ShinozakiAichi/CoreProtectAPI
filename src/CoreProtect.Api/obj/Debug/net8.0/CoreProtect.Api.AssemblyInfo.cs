@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CoreProtect.Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fafe209f1db5a98471ebfb17c8bbba6e4bfd44b5")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d6a30c60b7856bb151a2d61e8464b0ceb30d0c26")]
 [assembly: System.Reflection.AssemblyProductAttribute("CoreProtect.Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CoreProtect.Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

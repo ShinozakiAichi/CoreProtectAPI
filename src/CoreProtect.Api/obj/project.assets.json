@@ -83,7 +83,7 @@
           "buildTransitive/netstandard2.0/Microsoft.Extensions.Configuration.Binder.targets": {}
         }
       },
-      "Microsoft.Extensions.DependencyInjection.Abstractions/8.0.0": {
+      "Microsoft.Extensions.DependencyInjection.Abstractions/8.0.1": {
         "type": "package",
         "compile": {
           "lib/net8.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {
@@ -99,15 +99,113 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
-      "Microsoft.Extensions.Logging.Abstractions/7.0.1": {
+      "Microsoft.Extensions.Diagnostics.Abstractions/8.0.0": {
         "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.0",
+          "Microsoft.Extensions.Options": "8.0.0",
+          "System.Diagnostics.DiagnosticSource": "8.0.0"
+        },
         "compile": {
-          "lib/net7.0/Microsoft.Extensions.Logging.Abstractions.dll": {
+          "lib/net8.0/Microsoft.Extensions.Diagnostics.Abstractions.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/net7.0/Microsoft.Extensions.Logging.Abstractions.dll": {
+          "lib/net8.0/Microsoft.Extensions.Diagnostics.Abstractions.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net6.0/_._": {}
+        }
+      },
+      "Microsoft.Extensions.Diagnostics.HealthChecks/8.0.5": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.Diagnostics.HealthChecks.Abstractions": "8.0.5",
+          "Microsoft.Extensions.Hosting.Abstractions": "8.0.0",
+          "Microsoft.Extensions.Logging.Abstractions": "8.0.1",
+          "Microsoft.Extensions.Options": "8.0.2"
+        },
+        "compile": {
+          "lib/net8.0/Microsoft.Extensions.Diagnostics.HealthChecks.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/Microsoft.Extensions.Diagnostics.HealthChecks.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Microsoft.Extensions.Diagnostics.HealthChecks.Abstractions/8.0.5": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0/Microsoft.Extensions.Diagnostics.HealthChecks.Abstractions.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/Microsoft.Extensions.Diagnostics.HealthChecks.Abstractions.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Microsoft.Extensions.FileProviders.Abstractions/8.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.Primitives": "8.0.0"
+        },
+        "compile": {
+          "lib/net8.0/Microsoft.Extensions.FileProviders.Abstractions.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/Microsoft.Extensions.FileProviders.Abstractions.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net6.0/_._": {}
+        }
+      },
+      "Microsoft.Extensions.Hosting.Abstractions/8.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.Configuration.Abstractions": "8.0.0",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.0",
+          "Microsoft.Extensions.Diagnostics.Abstractions": "8.0.0",
+          "Microsoft.Extensions.FileProviders.Abstractions": "8.0.0",
+          "Microsoft.Extensions.Logging.Abstractions": "8.0.0"
+        },
+        "compile": {
+          "lib/net8.0/Microsoft.Extensions.Hosting.Abstractions.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/Microsoft.Extensions.Hosting.Abstractions.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net6.0/_._": {}
+        }
+      },
+      "Microsoft.Extensions.Logging.Abstractions/8.0.1": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.1"
+        },
+        "compile": {
+          "lib/net8.0/Microsoft.Extensions.Logging.Abstractions.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/Microsoft.Extensions.Logging.Abstractions.dll": {
             "related": ".xml"
           }
         },
@@ -278,6 +376,22 @@
         "frameworkReferences": [
           "Microsoft.AspNetCore.App"
         ]
+      },
+      "System.Diagnostics.DiagnosticSource/8.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0/System.Diagnostics.DiagnosticSource.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/System.Diagnostics.DiagnosticSource.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net6.0/_._": {}
+        }
       },
       "CoreProtect.Application/1.0.0": {
         "type": "project",
@@ -663,10 +777,10 @@
         "useSharedDesignerContext.txt"
       ]
     },
-    "Microsoft.Extensions.DependencyInjection.Abstractions/8.0.0": {
-      "sha512": "cjWrLkJXK0rs4zofsK4bSdg+jhDLTaxrkXu4gS6Y7MAlCvRyNNgwY/lJi5RDlQOnSZweHqoyvgvbdvQsRIW+hg==",
+    "Microsoft.Extensions.DependencyInjection.Abstractions/8.0.1": {
+      "sha512": "fGLiCRLMYd00JYpClraLjJTNKLmMJPnqxMaiRzEBIIvevlzxz33mXy39Lkd48hu1G+N21S7QpaO5ZzKsI6FRuA==",
       "type": "package",
-      "path": "microsoft.extensions.dependencyinjection.abstractions/8.0.0",
+      "path": "microsoft.extensions.dependencyinjection.abstractions/8.0.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -690,20 +804,148 @@
         "lib/netstandard2.0/Microsoft.Extensions.DependencyInjection.Abstractions.xml",
         "lib/netstandard2.1/Microsoft.Extensions.DependencyInjection.Abstractions.dll",
         "lib/netstandard2.1/Microsoft.Extensions.DependencyInjection.Abstractions.xml",
-        "microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512",
+        "microsoft.extensions.dependencyinjection.abstractions.8.0.1.nupkg.sha512",
         "microsoft.extensions.dependencyinjection.abstractions.nuspec",
         "useSharedDesignerContext.txt"
       ]
     },
-    "Microsoft.Extensions.Logging.Abstractions/7.0.1": {
-      "sha512": "pkeBFx0vqMW/A3aUVHh7MPu3WkBhaVlezhSZeb1c9XD0vUReYH1TLFSy5MxJgZfmz5LZzYoErMorlYZiwpOoNA==",
+    "Microsoft.Extensions.Diagnostics.Abstractions/8.0.0": {
+      "sha512": "JHYCQG7HmugNYUhOl368g+NMxYE/N/AiclCYRNlgCY9eVyiBkOHMwK4x60RYMxv9EL3+rmj1mqHvdCiPpC+D4Q==",
       "type": "package",
-      "path": "microsoft.extensions.logging.abstractions/7.0.1",
+      "path": "microsoft.extensions.diagnostics.abstractions/8.0.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon.png",
         "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "buildTransitive/net461/Microsoft.Extensions.Diagnostics.Abstractions.targets",
+        "buildTransitive/net462/_._",
+        "buildTransitive/net6.0/_._",
+        "buildTransitive/netcoreapp2.0/Microsoft.Extensions.Diagnostics.Abstractions.targets",
+        "lib/net462/Microsoft.Extensions.Diagnostics.Abstractions.dll",
+        "lib/net462/Microsoft.Extensions.Diagnostics.Abstractions.xml",
+        "lib/net6.0/Microsoft.Extensions.Diagnostics.Abstractions.dll",
+        "lib/net6.0/Microsoft.Extensions.Diagnostics.Abstractions.xml",
+        "lib/net7.0/Microsoft.Extensions.Diagnostics.Abstractions.dll",
+        "lib/net7.0/Microsoft.Extensions.Diagnostics.Abstractions.xml",
+        "lib/net8.0/Microsoft.Extensions.Diagnostics.Abstractions.dll",
+        "lib/net8.0/Microsoft.Extensions.Diagnostics.Abstractions.xml",
+        "lib/netstandard2.0/Microsoft.Extensions.Diagnostics.Abstractions.dll",
+        "lib/netstandard2.0/Microsoft.Extensions.Diagnostics.Abstractions.xml",
+        "microsoft.extensions.diagnostics.abstractions.8.0.0.nupkg.sha512",
+        "microsoft.extensions.diagnostics.abstractions.nuspec",
+        "useSharedDesignerContext.txt"
+      ]
+    },
+    "Microsoft.Extensions.Diagnostics.HealthChecks/8.0.5": {
+      "sha512": "VWIW6ZHBvwFTnuqoXwLLCdF0TTW2PlUanZHfNKNAuTr1Jw5d5UOZMjaMGC6iUNB+SnYiMGz6g2bhgpKtJb1bZQ==",
+      "type": "package",
+      "path": "microsoft.extensions.diagnostics.healthchecks/8.0.5",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net462/Microsoft.Extensions.Diagnostics.HealthChecks.dll",
+        "lib/net462/Microsoft.Extensions.Diagnostics.HealthChecks.xml",
+        "lib/net8.0/Microsoft.Extensions.Diagnostics.HealthChecks.dll",
+        "lib/net8.0/Microsoft.Extensions.Diagnostics.HealthChecks.xml",
+        "lib/netstandard2.0/Microsoft.Extensions.Diagnostics.HealthChecks.dll",
+        "lib/netstandard2.0/Microsoft.Extensions.Diagnostics.HealthChecks.xml",
+        "microsoft.extensions.diagnostics.healthchecks.8.0.5.nupkg.sha512",
+        "microsoft.extensions.diagnostics.healthchecks.nuspec"
+      ]
+    },
+    "Microsoft.Extensions.Diagnostics.HealthChecks.Abstractions/8.0.5": {
+      "sha512": "l+SAiGhkBB5D69IppZFyBs1vyf+50ktRQcV+NSDuYtrAgwmNjKVm2s8qb3RqOT/4pymJjI3UmZ96d8F1FamI4Q==",
+      "type": "package",
+      "path": "microsoft.extensions.diagnostics.healthchecks.abstractions/8.0.5",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net462/Microsoft.Extensions.Diagnostics.HealthChecks.Abstractions.dll",
+        "lib/net462/Microsoft.Extensions.Diagnostics.HealthChecks.Abstractions.xml",
+        "lib/net8.0/Microsoft.Extensions.Diagnostics.HealthChecks.Abstractions.dll",
+        "lib/net8.0/Microsoft.Extensions.Diagnostics.HealthChecks.Abstractions.xml",
+        "lib/netstandard2.0/Microsoft.Extensions.Diagnostics.HealthChecks.Abstractions.dll",
+        "lib/netstandard2.0/Microsoft.Extensions.Diagnostics.HealthChecks.Abstractions.xml",
+        "microsoft.extensions.diagnostics.healthchecks.abstractions.8.0.5.nupkg.sha512",
+        "microsoft.extensions.diagnostics.healthchecks.abstractions.nuspec"
+      ]
+    },
+    "Microsoft.Extensions.FileProviders.Abstractions/8.0.0": {
+      "sha512": "ZbaMlhJlpisjuWbvXr4LdAst/1XxH3vZ6A0BsgTphZ2L4PGuxRLz7Jr/S7mkAAnOn78Vu0fKhEgNF5JO3zfjqQ==",
+      "type": "package",
+      "path": "microsoft.extensions.fileproviders.abstractions/8.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "LICENSE.TXT",
+        "PACKAGE.md",
+        "THIRD-PARTY-NOTICES.TXT",
+        "buildTransitive/net461/Microsoft.Extensions.FileProviders.Abstractions.targets",
+        "buildTransitive/net462/_._",
+        "buildTransitive/net6.0/_._",
+        "buildTransitive/netcoreapp2.0/Microsoft.Extensions.FileProviders.Abstractions.targets",
+        "lib/net462/Microsoft.Extensions.FileProviders.Abstractions.dll",
+        "lib/net462/Microsoft.Extensions.FileProviders.Abstractions.xml",
+        "lib/net6.0/Microsoft.Extensions.FileProviders.Abstractions.dll",
+        "lib/net6.0/Microsoft.Extensions.FileProviders.Abstractions.xml",
+        "lib/net8.0/Microsoft.Extensions.FileProviders.Abstractions.dll",
+        "lib/net8.0/Microsoft.Extensions.FileProviders.Abstractions.xml",
+        "lib/netstandard2.0/Microsoft.Extensions.FileProviders.Abstractions.dll",
+        "lib/netstandard2.0/Microsoft.Extensions.FileProviders.Abstractions.xml",
+        "microsoft.extensions.fileproviders.abstractions.8.0.0.nupkg.sha512",
+        "microsoft.extensions.fileproviders.abstractions.nuspec",
+        "useSharedDesignerContext.txt"
+      ]
+    },
+    "Microsoft.Extensions.Hosting.Abstractions/8.0.0": {
+      "sha512": "AG7HWwVRdCHlaA++1oKDxLsXIBxmDpMPb3VoyOoAghEWnkUvEAdYQUwnV4jJbAaa/nMYNiEh5ByoLauZBEiovg==",
+      "type": "package",
+      "path": "microsoft.extensions.hosting.abstractions/8.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "LICENSE.TXT",
+        "PACKAGE.md",
+        "THIRD-PARTY-NOTICES.TXT",
+        "buildTransitive/net461/Microsoft.Extensions.Hosting.Abstractions.targets",
+        "buildTransitive/net462/_._",
+        "buildTransitive/net6.0/_._",
+        "buildTransitive/netcoreapp2.0/Microsoft.Extensions.Hosting.Abstractions.targets",
+        "lib/net462/Microsoft.Extensions.Hosting.Abstractions.dll",
+        "lib/net462/Microsoft.Extensions.Hosting.Abstractions.xml",
+        "lib/net6.0/Microsoft.Extensions.Hosting.Abstractions.dll",
+        "lib/net6.0/Microsoft.Extensions.Hosting.Abstractions.xml",
+        "lib/net7.0/Microsoft.Extensions.Hosting.Abstractions.dll",
+        "lib/net7.0/Microsoft.Extensions.Hosting.Abstractions.xml",
+        "lib/net8.0/Microsoft.Extensions.Hosting.Abstractions.dll",
+        "lib/net8.0/Microsoft.Extensions.Hosting.Abstractions.xml",
+        "lib/netstandard2.0/Microsoft.Extensions.Hosting.Abstractions.dll",
+        "lib/netstandard2.0/Microsoft.Extensions.Hosting.Abstractions.xml",
+        "lib/netstandard2.1/Microsoft.Extensions.Hosting.Abstractions.dll",
+        "lib/netstandard2.1/Microsoft.Extensions.Hosting.Abstractions.xml",
+        "microsoft.extensions.hosting.abstractions.8.0.0.nupkg.sha512",
+        "microsoft.extensions.hosting.abstractions.nuspec",
+        "useSharedDesignerContext.txt"
+      ]
+    },
+    "Microsoft.Extensions.Logging.Abstractions/8.0.1": {
+      "sha512": "RIFgaqoaINxkM2KTOw72dmilDmTrYA0ns2KW4lDz4gZ2+o6IQ894CzmdL3StM2oh7QQq44nCWiqKqc4qUI9Jmg==",
+      "type": "package",
+      "path": "microsoft.extensions.logging.abstractions/8.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "LICENSE.TXT",
+        "PACKAGE.md",
         "THIRD-PARTY-NOTICES.TXT",
         "analyzers/dotnet/roslyn3.11/cs/Microsoft.Extensions.Logging.Generators.dll",
         "analyzers/dotnet/roslyn3.11/cs/cs/Microsoft.Extensions.Logging.Generators.resources.dll",
@@ -758,9 +1000,11 @@
         "lib/net6.0/Microsoft.Extensions.Logging.Abstractions.xml",
         "lib/net7.0/Microsoft.Extensions.Logging.Abstractions.dll",
         "lib/net7.0/Microsoft.Extensions.Logging.Abstractions.xml",
+        "lib/net8.0/Microsoft.Extensions.Logging.Abstractions.dll",
+        "lib/net8.0/Microsoft.Extensions.Logging.Abstractions.xml",
         "lib/netstandard2.0/Microsoft.Extensions.Logging.Abstractions.dll",
         "lib/netstandard2.0/Microsoft.Extensions.Logging.Abstractions.xml",
-        "microsoft.extensions.logging.abstractions.7.0.1.nupkg.sha512",
+        "microsoft.extensions.logging.abstractions.8.0.1.nupkg.sha512",
         "microsoft.extensions.logging.abstractions.nuspec",
         "useSharedDesignerContext.txt"
       ]
@@ -1018,6 +1262,35 @@
         "swashbuckle.aspnetcore.swaggerui.nuspec"
       ]
     },
+    "System.Diagnostics.DiagnosticSource/8.0.0": {
+      "sha512": "c9xLpVz6PL9lp/djOWtk5KPDZq3cSYpmXoJQY524EOtuFl5z9ZtsotpsyrDW40U1DRnQSYvcPKEUV0X//u6gkQ==",
+      "type": "package",
+      "path": "system.diagnostics.diagnosticsource/8.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "buildTransitive/net461/System.Diagnostics.DiagnosticSource.targets",
+        "buildTransitive/net462/_._",
+        "buildTransitive/net6.0/_._",
+        "buildTransitive/netcoreapp2.0/System.Diagnostics.DiagnosticSource.targets",
+        "lib/net462/System.Diagnostics.DiagnosticSource.dll",
+        "lib/net462/System.Diagnostics.DiagnosticSource.xml",
+        "lib/net6.0/System.Diagnostics.DiagnosticSource.dll",
+        "lib/net6.0/System.Diagnostics.DiagnosticSource.xml",
+        "lib/net7.0/System.Diagnostics.DiagnosticSource.dll",
+        "lib/net7.0/System.Diagnostics.DiagnosticSource.xml",
+        "lib/net8.0/System.Diagnostics.DiagnosticSource.dll",
+        "lib/net8.0/System.Diagnostics.DiagnosticSource.xml",
+        "lib/netstandard2.0/System.Diagnostics.DiagnosticSource.dll",
+        "lib/netstandard2.0/System.Diagnostics.DiagnosticSource.xml",
+        "system.diagnostics.diagnosticsource.8.0.0.nupkg.sha512",
+        "system.diagnostics.diagnosticsource.nuspec",
+        "useSharedDesignerContext.txt"
+      ]
+    },
     "CoreProtect.Application/1.0.0": {
       "type": "project",
       "path": "../CoreProtect.Application/CoreProtect.Application.csproj",
@@ -1040,6 +1313,7 @@
       "CoreProtect.Domain >= 1.0.0",
       "CoreProtect.Infrastructure >= 1.0.0",
       "Microsoft.AspNetCore.OpenApi >= 8.0.6",
+      "Microsoft.Extensions.Diagnostics.HealthChecks >= 8.0.5",
       "Microsoft.Extensions.Options >= 8.0.0",
       "Microsoft.Extensions.Options.ConfigurationExtensions >= 8.0.0",
       "Swashbuckle.AspNetCore >= 6.5.0"
@@ -1110,6 +1384,10 @@
             "target": "Package",
             "version": "[8.0.6, )"
           },
+          "Microsoft.Extensions.Diagnostics.HealthChecks": {
+            "target": "Package",
+            "version": "[8.0.5, )"
+          },
           "Microsoft.Extensions.Options": {
             "target": "Package",
             "version": "[8.0.0, )"
@@ -1145,5 +1423,16 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1605",
+      "level": "Error",
+      "message": "Предупреждение как ошибка: Обнаружено понижение версии пакета Microsoft.Extensions.Options с 8.0.2 на 8.0.0. Чтобы выбрать другую версию, создайте ссылку на пакет напрямую из проекта. \r\n CoreProtect.Api -> Microsoft.Extensions.Diagnostics.HealthChecks 8.0.5 -> Microsoft.Extensions.Options (>= 8.0.2) \r\n CoreProtect.Api -> Microsoft.Extensions.Options (>= 8.0.0)",
+      "libraryId": "Microsoft.Extensions.Options",
+      "targetGraphs": [
+        "net8.0"
+      ]
+    }
+  ]
 }

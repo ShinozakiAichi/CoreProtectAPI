@@ -2,7 +2,7 @@ using System;
 using CoreProtect.Infrastructure.HealthChecks;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 
-namespace CoreProtect.Infrastructure;
+namespace CoreProtect.Infrastructure.HealthChecks;
 
 public static class HealthCheckBuilderExtensions
 {

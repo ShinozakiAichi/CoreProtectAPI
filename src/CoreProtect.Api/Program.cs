@@ -2,7 +2,6 @@ using CoreProtect.Api.Configuration;
 using CoreProtect.Api.Middleware;
 using CoreProtect.Application;
 using CoreProtect.Infrastructure;
-using CoreProtect.Infrastructure.HealthChecks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpLogging;
 using Microsoft.AspNetCore.Mvc;
@@ -42,7 +41,7 @@ builder.Services.AddHttpLogging(logging =>
 builder.Services.AddCors();
 builder.Services.AddHealthChecks()
     .AddCheck("self", () => HealthCheckResult.Healthy(), tags: new[] { "live" })
-    .AddCheck<CoreProtectSchemaHealthCheck>("coreprotect_schema", tags: new[] { "ready" });
+    .AddCoreProtectSchemaCheck();
 
 var app = builder.Build();
 

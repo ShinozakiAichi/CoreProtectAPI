@@ -1,3 +1,5 @@
+using System;
+using System.Linq;
 using CoreProtect.Application.Abstractions;
 using CoreProtect.Infrastructure.Configuration;
 using CoreProtect.Infrastructure.Data;
@@ -15,7 +17,23 @@ public static class DependencyInjection
         services.AddSingleton<IDbConnectionFactory, MySqlConnectionFactory>();
         services.AddSingleton<IMetadataDecoder, MetadataDecoder>();
         services.AddSingleton<ICoreProtectSchemaVerifier, CoreProtectSchemaVerifier>();
-        services.AddTransient<ICoreProtectReadRepository, CoreProtectReadRepository>();
+        services.AddScoped<ICoreProtectReadRepository>(sp =>
+        {
+            var implType = typeof(CoreProtectReadRepository);
+            var iface = typeof(ICoreProtectReadRepository);
+
+            var map = implType.GetInterfaceMap(iface);
+            var ifaceMethodNames = map.InterfaceMethods.Select(m => m.ToString()).ToHashSet();
+            var targetMethodNames = map.TargetMethods.Select(m => m?.ToString() ?? "<null>").ToHashSet();
+
+            var missing = ifaceMethodNames.Except(targetMethodNames).ToArray();
+            if (missing.Length > 0)
+            {
+                throw new TypeLoadException("Missing interface methods: " + string.Join("; ", missing));
+            }
+
+            return (ICoreProtectReadRepository)ActivatorUtilities.CreateInstance(sp, implType);
+        });
         return services;
     }
 }

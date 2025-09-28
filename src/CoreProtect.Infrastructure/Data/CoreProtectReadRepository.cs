@@ -147,6 +147,11 @@ SELECT DISTINCT id, current_user, uuid FROM name_history ORDER BY time DESC";
         return QueryAsync(sql, parameters, MapArtMap, cancellationToken);
     }
 
+    Task<IReadOnlyList<ArtMapEntry>> ICoreProtectReadRepository.GetArtMapAsync(
+        Pagination pagination,
+        CancellationToken cancellationToken) =>
+        GetArtMapAsync(pagination, cancellationToken);
+
     public Task<IReadOnlyList<BlockDataMapEntry>> GetBlockDataMapAsync(Pagination pagination, CancellationToken cancellationToken)
     {
         const string sql = "SELECT rowid, id, data FROM co_blockdata_map ORDER BY id LIMIT @limit OFFSET @offset";

@@ -18,5 +18,6 @@ public sealed class CoreProtectReadRepositoryTypeTests
     {
         var interfaceMap = typeof(CoreProtectReadRepository).GetInterfaceMap(typeof(ICoreProtectReadRepository));
         Assert.Contains(interfaceMap.InterfaceMethods, method => method.Name == nameof(ICoreProtectReadRepository.GetArtMapAsync));
+        Assert.Contains(interfaceMap.TargetMethods, method => method.Name == nameof(CoreProtectReadRepository.GetArtMapAsync));
     }
 }

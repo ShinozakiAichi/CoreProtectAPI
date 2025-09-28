@@ -151,24 +151,36 @@ docker run -p 8080:8080 \
   coreprotect-api
 ```
 
-Liveness: `/healthz` · Readiness: `/readyz`.
+Liveness: `/healthz` · Readiness: `/readyz` (validates CoreProtect schema tables).
 
 ## API catalogue
 
 | Endpoint | Purpose |
 | -------- | ------- |
 | `GET /v1/worlds` | Enumerate worlds. |
+| `GET /v1/users` | Enumerate users with UUIDs and first-seen timestamps. |
 | `GET /v1/users/search?name=` | Fuzzy username search (≤50 results). |
 | `GET /v1/users/resolve?name=` | Resolve historical usernames. |
+| `GET /v1/username-log` | Username change history joined with the latest handle. |
+| `GET /v1/maps/art` | Painting identifier to art name mapping. |
+| `GET /v1/maps/blockdata` | Block data ID mapping. |
+| `GET /v1/maps/entities` | Entity type ID dictionary. |
+| `GET /v1/maps/materials` | Material ID dictionary. |
 | `GET /v1/blocks` | Block placement & break history. |
-| `GET /v1/containers` | Container interactions with metadata decoding. |
-| `GET /v1/items` | Item pickup/drop events. |
+| `GET /v1/containers` | Container interactions with metadata decoding and material names. |
+| `GET /v1/items` | Item pickup/drop events with material names. |
+| `GET /v1/entities` | Raw entity snapshots (Java-serialized payload). |
+| `GET /v1/skulls` | Player head ownership history. |
 | `GET /v1/commands` | Command executions (`message → command`). |
 | `GET /v1/chat` | Chat messages. |
 | `GET /v1/sessions` | Login/logout events. |
 | `GET /v1/signs` | Sign placements with coloured text. |
+| `GET /v1/database/locks` | Current CoreProtect database lock status. |
+| `GET /v1/database/versions` | CoreProtect version history. |
 
 Shared parameters: `limit`, `offset`, `sort`, `from`, `to`, `world`, `user`, `userLike`, coordinate ranges (`xMin/xMax`, `yMin/yMax`, `zMin/zMax`). Responses expose both Unix (`time`) and ISO-8601 (`timestamp`).
+
+The mapping endpoints reuse `limit/offset`; timestamped tables (`/v1/entities`, `/v1/skulls`, `/v1/database/*`) honour optional `from`/`to` Unix seconds just like log queries. Containers and items now return `itemMaterial` alongside numeric IDs for easier lookups.
 
 ## Security & operations
 

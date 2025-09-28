@@ -12,6 +12,7 @@ public sealed record ItemDto(
     int Z,
     string Action,
     int ItemTypeId,
+    string? ItemMaterial,
     int ItemData,
     int Amount,
     bool RolledBack)
@@ -29,14 +30,15 @@ public sealed record ItemDto(
             entry.Time,
             entry.Timestamp.ToUniversalTime().ToString("O"),
             entry.User,
-            entry.World,
-            entry.Coordinates.X,
-            entry.Coordinates.Y,
-            entry.Coordinates.Z,
-            action,
-            entry.ItemTypeId,
-            entry.ItemData,
-            entry.Amount,
-            entry.RolledBack);
-    }
+        entry.World,
+        entry.Coordinates.X,
+        entry.Coordinates.Y,
+        entry.Coordinates.Z,
+        action,
+        entry.ItemTypeId,
+        entry.ItemMaterial,
+        entry.ItemData,
+        entry.Amount,
+        entry.RolledBack);
+}
 }

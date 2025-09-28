@@ -47,4 +47,34 @@ public sealed class CoreProtectQueryService : ICoreProtectQueryService
 
     public Task<IReadOnlyList<SignLogEntry>> GetSignsAsync(SignQueryParameters parameters, CancellationToken cancellationToken) =>
         _repository.GetSignsAsync(parameters, cancellationToken);
+
+    public Task<IReadOnlyList<ArtMapEntry>> GetArtMapAsync(Pagination pagination, CancellationToken cancellationToken) =>
+        _repository.GetArtMapAsync(pagination, cancellationToken);
+
+    public Task<IReadOnlyList<BlockDataMapEntry>> GetBlockDataMapAsync(Pagination pagination, CancellationToken cancellationToken) =>
+        _repository.GetBlockDataMapAsync(pagination, cancellationToken);
+
+    public Task<IReadOnlyList<EntityMapEntry>> GetEntityMapAsync(Pagination pagination, CancellationToken cancellationToken) =>
+        _repository.GetEntityMapAsync(pagination, cancellationToken);
+
+    public Task<IReadOnlyList<MaterialMapEntry>> GetMaterialMapAsync(Pagination pagination, CancellationToken cancellationToken) =>
+        _repository.GetMaterialMapAsync(pagination, cancellationToken);
+
+    public Task<IReadOnlyList<DatabaseLockInfo>> GetDatabaseLocksAsync(CancellationToken cancellationToken) =>
+        _repository.GetDatabaseLocksAsync(cancellationToken);
+
+    public Task<IReadOnlyList<EntitySnapshot>> GetEntitiesAsync(TimeRangeQueryParameters parameters, CancellationToken cancellationToken) =>
+        _repository.GetEntitiesAsync(parameters, cancellationToken);
+
+    public Task<IReadOnlyList<SkullEntry>> GetSkullsAsync(TimeRangeQueryParameters parameters, CancellationToken cancellationToken) =>
+        _repository.GetSkullsAsync(parameters, cancellationToken);
+
+    public Task<IReadOnlyList<UserRecord>> GetUsersAsync(Pagination pagination, CancellationToken cancellationToken) =>
+        _repository.GetUsersAsync(pagination, cancellationToken);
+
+    public Task<IReadOnlyList<UsernameLogEntry>> GetUsernameLogAsync(Pagination pagination, CancellationToken cancellationToken) =>
+        _repository.GetUsernameLogAsync(pagination, cancellationToken);
+
+    public Task<IReadOnlyList<VersionInfo>> GetVersionsAsync(CancellationToken cancellationToken) =>
+        _repository.GetVersionsAsync(cancellationToken);
 }

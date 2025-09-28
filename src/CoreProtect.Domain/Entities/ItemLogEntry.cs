@@ -17,6 +17,7 @@ public sealed record ItemLogEntry(
     Coordinates Coordinates,
     ItemAction Action,
     int ItemTypeId,
+    string? ItemMaterial,
     int ItemData,
     int Amount,
     bool RolledBack);

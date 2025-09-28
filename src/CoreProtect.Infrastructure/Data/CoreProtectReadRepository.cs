@@ -140,11 +140,11 @@ SELECT DISTINCT id, current_user, uuid FROM name_history ORDER BY time DESC";
         return QueryAsync(sql, dapperParameters, MapSign, cancellationToken);
     }
 
-    public async Task<IReadOnlyList<ArtMapEntry>> GetArtMapAsync(Pagination pagination, CancellationToken cancellationToken)
+    public Task<IReadOnlyList<ArtMapEntry>> GetArtMapAsync(Pagination pagination, CancellationToken cancellationToken)
     {
         const string sql = "SELECT rowid, id, art FROM co_art_map ORDER BY id LIMIT @limit OFFSET @offset";
         var parameters = CreatePaginationParameters(pagination);
-        return await QueryAsync(sql, parameters, MapArtMap, cancellationToken).ConfigureAwait(false);
+        return QueryAsync(sql, parameters, MapArtMap, cancellationToken);
     }
 
     public Task<IReadOnlyList<BlockDataMapEntry>> GetBlockDataMapAsync(Pagination pagination, CancellationToken cancellationToken)

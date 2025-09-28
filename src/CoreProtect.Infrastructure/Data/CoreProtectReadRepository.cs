@@ -143,36 +143,28 @@ SELECT DISTINCT id, current_user, uuid FROM name_history ORDER BY time DESC";
     public Task<IReadOnlyList<ArtMapEntry>> GetArtMapAsync(Pagination pagination, CancellationToken cancellationToken)
     {
         const string sql = "SELECT rowid, id, art FROM co_art_map ORDER BY id LIMIT @limit OFFSET @offset";
-        var parameters = new DynamicParameters();
-        parameters.Add("@limit", pagination.Limit);
-        parameters.Add("@offset", pagination.Offset);
+        var parameters = CreatePaginationParameters(pagination);
         return QueryAsync(sql, parameters, MapArtMap, cancellationToken);
     }
 
     public Task<IReadOnlyList<BlockDataMapEntry>> GetBlockDataMapAsync(Pagination pagination, CancellationToken cancellationToken)
     {
         const string sql = "SELECT rowid, id, data FROM co_blockdata_map ORDER BY id LIMIT @limit OFFSET @offset";
-        var parameters = new DynamicParameters();
-        parameters.Add("@limit", pagination.Limit);
-        parameters.Add("@offset", pagination.Offset);
+        var parameters = CreatePaginationParameters(pagination);
         return QueryAsync(sql, parameters, MapBlockDataMap, cancellationToken);
     }
 
     public Task<IReadOnlyList<EntityMapEntry>> GetEntityMapAsync(Pagination pagination, CancellationToken cancellationToken)
     {
         const string sql = "SELECT rowid, id, entity FROM co_entity_map ORDER BY id LIMIT @limit OFFSET @offset";
-        var parameters = new DynamicParameters();
-        parameters.Add("@limit", pagination.Limit);
-        parameters.Add("@offset", pagination.Offset);
+        var parameters = CreatePaginationParameters(pagination);
         return QueryAsync(sql, parameters, MapEntityMap, cancellationToken);
     }
 
     public Task<IReadOnlyList<MaterialMapEntry>> GetMaterialMapAsync(Pagination pagination, CancellationToken cancellationToken)
     {
         const string sql = "SELECT rowid, id, material FROM co_material_map ORDER BY id LIMIT @limit OFFSET @offset";
-        var parameters = new DynamicParameters();
-        parameters.Add("@limit", pagination.Limit);
-        parameters.Add("@offset", pagination.Offset);
+        var parameters = CreatePaginationParameters(pagination);
         return QueryAsync(sql, parameters, MapMaterialMap, cancellationToken);
     }
 
@@ -207,18 +199,14 @@ SELECT DISTINCT id, current_user, uuid FROM name_history ORDER BY time DESC";
     public Task<IReadOnlyList<UserRecord>> GetUsersAsync(Pagination pagination, CancellationToken cancellationToken)
     {
         const string sql = "SELECT rowid, time, user, uuid FROM co_user ORDER BY time DESC LIMIT @limit OFFSET @offset";
-        var parameters = new DynamicParameters();
-        parameters.Add("@limit", pagination.Limit);
-        parameters.Add("@offset", pagination.Offset);
+        var parameters = CreatePaginationParameters(pagination);
         return QueryAsync(sql, parameters, MapUserRecord, cancellationToken);
     }
 
     public Task<IReadOnlyList<UsernameLogEntry>> GetUsernameLogAsync(Pagination pagination, CancellationToken cancellationToken)
     {
         const string sql = "SELECT ul.rowid, ul.time, ul.uuid, ul.user, u.user AS current_user FROM co_username_log ul LEFT JOIN co_user u ON u.uuid = ul.uuid ORDER BY ul.time DESC LIMIT @limit OFFSET @offset";
-        var parameters = new DynamicParameters();
-        parameters.Add("@limit", pagination.Limit);
-        parameters.Add("@offset", pagination.Offset);
+        var parameters = CreatePaginationParameters(pagination);
         return QueryAsync(sql, parameters, MapUsernameLog, cancellationToken);
     }
 
@@ -489,6 +477,14 @@ SELECT DISTINCT id, current_user, uuid FROM name_history ORDER BY time DESC";
     }
 
     private static string ToSqlOrder(SortDirection direction) => direction == SortDirection.Ascending ? "ASC" : "DESC";
+
+    private static DynamicParameters CreatePaginationParameters(Pagination pagination)
+    {
+        var parameters = new DynamicParameters();
+        parameters.Add("@limit", pagination.Limit);
+        parameters.Add("@offset", pagination.Offset);
+        return parameters;
+    }
 
 
     private static ArtMapEntry MapArtMap(IDataRecord record) =>

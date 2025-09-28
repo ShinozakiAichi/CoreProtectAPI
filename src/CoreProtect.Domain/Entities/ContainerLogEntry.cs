@@ -16,6 +16,7 @@ public sealed record ContainerLogEntry(
     Coordinates Coordinates,
     ContainerAction Action,
     int ItemTypeId,
+    string? ItemMaterial,
     int ItemData,
     int Amount,
     MetadataDocument Metadata,
